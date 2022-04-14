@@ -1,2 +1,2 @@
-# AIclassProject
-AIclassProject in the class.
+# AIClassProject
+AIClassProject in the class.
