@@ -1,0 +1,28 @@
+movie_title, Title of the Movie, 電影名稱
+duration, Duration in minutes, 電影長度
+director_name, Name of the Director of the Movie, 導演名
+director_facebook_likes, Number of likes of the Director on his Facebook Page, 導演粉絲專業讚數
+actor_1_name, Primary actor starring in the movie, 主要演員名
+actor_1_facebook_likes, Number of likes of the Actor_1 on his/her Facebook Page, 主要演員粉絲專業讚數
+actor_2_name, Other actor starring in the movie, 主要演員名
+actor_2_facebook_likes, Number of likes of the Actor_2 on his/her Facebook Page, 主要演員粉絲專業讚數
+actor_3_name, Other actor starring in the movie, 主要演員名
+actor_3_facebook_likes, Number of likes of the Actor_3 on his/her Facebook Page, 主要演員粉絲專業讚數
+num_user_for_reviews, Number of users who gave a review, 使用者給予回饋數
+num_critic_for_reviews, Number of critical reviews on imdb, 在IMDB上的評論數
+num_voted_users, Number of people who voted for the movie, 投票數
+cast_total_facebook_likes, Total number of facebook likes of the entire cast of the movie, 整部電影的讚數
+movie_facebook_likes, Number of Facebook likes in the movie page, 電影粉絲專業讚數
+plot_keywords, Keywords describing the movie plot, 電影關鍵詞
+facenumber_in_poster, Number of the actor who featured in the movie poster, 電影海報出現演員數
+color, Film colorization. ‘Black and White’ or ‘Color’, 黑白電影/彩色電影
+genres, Film categorization like ‘Animation’, ‘Comedy’, ‘Romance’, ‘Horror’, ‘Sci-Fi’, ‘Action’, ‘Family’, 電影類別
+title_year, The year in which the movie is released (1916:2016), 電影出版年
+language, English, Arabic, Chinese, French, German, Danish, Italian, Japanese etc, 語言
+country, Country where the movie is produced, 出版國家
+content_rating, Content rating of the movie, 電影分級
+aspect_ratio, Aspect ratio the movie was made in, 電影長寬比
+movie_imdb_link, IMDB link of the movie, 電影imdb連結
+gross, Gross earnings of the movie in Dollars, 電影總收益
+budget, Budget of the movie in Dollars, 電影預算
+imdb_score, IMDB Score of the movie on IMDB, IMDB評分
