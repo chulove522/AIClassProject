@@ -1,0 +1,13 @@
+version: "3"
+services:
+    myapplication:
+        image: aiproject.azurecr.io/docker-python:1.4
+        environment:
+            - MONGODB_CONNSTRING=mongodb+srv://peach:3x:rgyAXQ7BWiQA@mycluster.5y8sq.mongodb.net/MembersData?retryWrites=true&w=majority
+        ports:
+            - 80:80
+    mongodb:
+        image: mongo:5
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=peach
+            - MONGO_INITDB_ROOT_PASSWORD=3x:rgyAXQ7BWiQA
