@@ -1,0 +1,6 @@
+version: "3.10.4"
+services:
+    beanstalk-flask:
+        image: "maaron730/beanstalk-flask"
+        ports:
+            - "80:80"
