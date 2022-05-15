@@ -160,9 +160,15 @@ class TempArea:
         if name not in __name__.userlist:
             return render_template("register.html")
         return name
+    # ['Documentary', 'Comedy', 'TV', 'Movie', 'Music', 'Animation'=6,
+    #    'Thriller'=7, 'History', 'Fantasy', 'Adventure'=10, 'Mystery', 'Sci-Fi'=12,
+    #    'Western', 'Foreign', 'Action'=15, 'Family', 'Horror', 'Crime'=18, 'War',
+    #    'Romance'=20, 'Drama']
 
+
+    
 
 #啟動
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=80) #啟動server
+    app.run(debug=True, host="0.0.0.0", port=3000) #啟動server
 
