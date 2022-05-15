@@ -30,40 +30,41 @@
 						</div>
 						<div>
 							<section>
-								<h3 class="major">登入表單</h3>
-								<form action="/loginok" method="POST">
+								<h3 class="major">這是 {{name}} 的個人資料</h3>
+								<form>
 									<div class="fields">
 										<div class="field half">
-											<label for="username">帳號</label>
-											<input type="text" name="username" value="" placeholder="english登入帳號" />
+											<label for="username">您的帳號是 {{username}}</label>
+											
 										</div>
 										<div class="field half">
-											<label for="nickname">密碼</label>
-											<input type="password" name="password" value="" placeholder="your password" />
+											<label for="password">密碼</label>
+											
 										</div>
 										<div class="field half">
-											<input type="checkbox" id="demo-human" name="human">
-											<label for="demo-human">我不是機器人</label>
+											<label for="nickname">暱稱</label>
+											
 										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-									</ul>
+										<div class="field half">
+											<label for="email">您的信箱是 {{email}}</label>
+											
+										</div>
+                                        <div class="field half">
+											<label for="password">您的密碼是 {{password}}</label>
+											
+										</div>
+									</div>									
 								</form>
+						</div>
+					
+
+        <form action="/updateperson">
+            <button>點我更改個人資料(這個功能還沒做好~)</button>
+        </form>
+        <li><a href="/signout">登出</a></li>
+        <li><a href="/">回主頁</a></li>
 							</section>
 				<!-- Main -->
-					<div id="main">
-						<!-- Elements -->
-						<h4>Team</h4>
-						<ul>
-							<li>Peach</li>
-							<li>Aaron</li>
-							<li>Meitsu</li>
-							<li>simo</li>
-							<li>better</li>
-						</ul>
-
-					</div>
 				</header>
 			</div>
 			</div>
