@@ -15,7 +15,7 @@ account = __password = client = memberdb = usercollection = NULL
 def init():
     global account,__password,client,memberdb,usercollection
     account= quote_plus("peach")
-    __password=  quote_plus("3x:rgyAXQ7BWiQA")
+    __password=  quote_plus("Ss123456")
     client = pymongo.MongoClient("mongodb+srv://"+ account + ":" + __password + "@mycluster.5y8sq.mongodb.net/MembersData?retryWrites=true&w=majority", server_api=ServerApi('1'))
     #選擇資料庫memberdb
     memberdb = client.members
