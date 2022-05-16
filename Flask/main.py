@@ -37,7 +37,7 @@ def index():
     # print("引薦網址",request.headers.get("referrer")) #從哪連過來
     if(__islogin__):
         nickname_ = session["nickname"]
-        username_ = session["username","123456"]
+        username_ = session["username"]
         return render_template("index.html",name=nickname_,user=username_)
 
     lang = request.headers.get("accept-language") #瀏覽器的偏好語言
@@ -80,6 +80,7 @@ def registerok():
     session["username"] = username
     likecategory = request.form.get("category")  #喜愛的類別 <= 這個之後再做
     sex = request.form["gender"]
+    print(sex)
     #可能有錯
     if sex==1:
         sex=0
