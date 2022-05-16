@@ -119,7 +119,7 @@ def setdelete_manydatas(level):
 #setdelete_onedata("hi")
 #setdelete_manydatas(3)
 #----------------------------------------#
-#隨便製造一些用戶
+#隨便製造一些用戶#隨機
 def randomamenber():
     for i in range(1,11):
         raneng = ''.join(random.sample(string.ascii_letters + string.digits, 8))
