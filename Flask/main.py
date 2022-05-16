@@ -80,6 +80,7 @@ def registerok():
     session["username"] = username
     likecategory = request.form.get("category")  #喜愛的類別 <= 這個之後再做
     sex = request.form["gender"]
+    #可能有錯
     if sex==1:
         sex=0
     else:
@@ -156,7 +157,14 @@ def signout():
         del session["username"]
         del session["useremail"]
     return redirect("/")
-
+#確認是否使用者已經登入
+@app.route("/islogin") #名字參數
+def islogin():
+    if(__islogin__):
+        return True
+    else:
+        return False
+        
 #暫時放置區
 class TempArea:
     @app.route("/getid")
