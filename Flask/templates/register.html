@@ -31,54 +31,144 @@
 						<div>
 							<section>
 								<h3 class="major">註冊表單</h3>
-								<form action="/registerok" method="POST">
+								<!--<form onsubmit = "return robotalert(this)"></form>-->
+								<!--<form id="theForm" action="/registerok" method="POST">-->
+								<form>
 									<div class="fields">
 										<div class="field half">
 											<label for="username">帳號</label>
-											<input type="username" name="username" value="" placeholder="english登入帳號" />
+											<input type="text" name="username" id="username" value="" placeholder="english登入帳號" />
 										</div>
 										<div class="field half">
-											<label for="nickname">密碼</label>
-											<input type="text" name="password" value="" placeholder="your password" />
+											<label for="password">密碼</label>
+											<input type="text" id="password"name="password" value="" placeholder="your password" />
 										</div>
 										<div class="field half">
 											<label for="nickname">暱稱</label>
-											<input type="text" name="nickname" value="" placeholder="王小花" />
+											<input type="text" id="nickname" name="nickname" value="" placeholder="王小花" />
 										</div>
 										<div class="field half">
 											<label for="email">信箱</label>
-											<input type="email" name="email" value="" placeholder="abc@gmail.com" />
+											<input type="email" id="email" name="email" value="" placeholder="abc@gmail.com" />
 										</div>
-										<div class="field">
-											<label for="category">喜好類型</label>
-											<select name="category">
-												<option value="">-</option>
-												<option value="1">測試1</option>
-												<option value="2">測試2</option>
-												<option value="3">測試3</option>
-												<option value="4">測試4</option>
-											</select>
+									</div>	
+									<div><h3>喜好類型</h3></div>
+									<div class="fields">
+										<div class="field half">
+											<input type="checkbox" id="ad" name="category" value="10">
+											<label for="ad">冒險</label>
 										</div>
 										<div class="field half">
-											<input type="radio" id="demo-priority-low" name="gender" checked>
-											<label for="demo-priority-low">男</label>
+											<input type="checkbox" id="my" name="category" value="11">
+											<label for="my">神秘</label>
 										</div>
 										<div class="field half">
-											<input type="radio" id="demo-priority-high" name="gender">
-											<label for="demo-priority-high">女</label>
+											<input type="checkbox" id="ac" name="category" value="15">
+											<label for="ac">動作</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="horo" name="category" value="12">
+											<label for="horo">科幻片</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="fan" name="category" value="9">
+											<label for="fan">奇幻</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="cr" name="category" value="18">
+											<label for="cr">犯罪</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="anime" name="category" value="6">
+											<label for="anime">動畫片</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="ko" name="category" value="7">
+											<label for="ko">恐怖片</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="re" name="category" value="1">
+											<label for="re">紀錄片</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="com" name="category" value="2">
+											<label for="com">喜劇</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="tv" name="category" value="3">
+											<label for="tv">TV節目</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="mv" name="category" value="4">
+											<label for="mv">大眾電影</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="mu" name="category" value="5">
+											<label for="mu">音樂劇</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="hi" name="category" value="8">
+											<label for="hi">歷史</label>
+										</div>
+										<div class="field half">
+											<input type="checkbox" id="ro" name="category" value="20">
+											<label for="ro">浪漫</label>
+										</div>
+									</div>
+									<div><h2>您的性別</h2></div>
+									<div class="fields">	
+										<div class="field half">
+											<input type="radio" id="male" name="gender" checked>
+											<label for="male">男</label>
+										</div>
+										<div class="field half">
+											<input type="radio" id="female" name="gender">
+											<label for="female">女</label>
 										</div>
 										<div class="field half">
 											<input type="checkbox" id="demo-copy" name="copy">
 											<label for="demo-copy">傳送副本至我的信箱</label>
 										</div>
+										
 										<div class="field half">
-											<input type="checkbox" id="demo-human" name="human">
+											<input type="checkbox" id="demo-human" name="human" value="我不是機器人">
 											<label for="demo-human">我不是機器人</label>
 										</div>
+
+										<script type="text/javascript">
+											function robotalert(form)
+											{
+												cansubmit = true;
+												if(! $("#demo-human").prop("checked") ){ // 回傳布林值
+													alert( "你沒有勾選"+$("#demo-human").val() );
+													cansubmit = false;
+												}
+												if(document.getElementById('password').value ==""){ // 回傳布林值
+													alert( "你沒有設定密碼" );
+													cansubmit = false;
+												}
+												if(document.getElementById('username').value ==""  ){ // 回傳布林值
+													alert( "你沒有設定帳號" );
+													cansubmit = false;
+												}
+												if(document.getElementById('nickname').value =="" ){ // 回傳布林值
+													alert( "你沒有設定暱稱" );
+													cansubmit = false;
+												}
+												if(cansubmit){
+													alert( "檢查通過" );
+													
+													document.getElementById('submitbtn').disabled=false;// 變更按鈕為可用
+												}
+											}
+										</script>
+											
 									</div>
+									
 									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
+										<li><input type="button" value="檢查" onclick= "robotalert()"></button></li>
+										<li><input type="submit" value="送出" id="submitbtn" class="primary" formmethod="post" formaction="/registerok" disabled></li>
+										<li><input type="reset" value="重設" /></li>
 									</ul>
 								</form>
 							</section>

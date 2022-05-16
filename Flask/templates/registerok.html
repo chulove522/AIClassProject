@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Dimension by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<title>註冊完成</title>
@@ -21,28 +16,52 @@
 							<span class="icon fa-gem"></span>
 						</div>
 						<div class="content">
-							<form method="get",action="/personal">
 							<div class="inner">
-								<h1>導向到個人頁面...</h1>
-								<p>請稍等</p>
+								<h1>只是想跟您說...歡迎光臨!</h1>
+								<p>3秒後導向到個人頁面</p>
+								<div id="timer">
+
+								</div>
 							</div>
+							<!-------------導向----------->
+							<form method="get" action="/personal" id="personalPage">
+								<input type="submit">
 							</form>
+							<!---
+							<input type="submit" id="personalPage" formmethod="get" formaction="/personal">
+							<-------------------------------->
+
 						</div>
 					</header>
-					<form method="get",action="/personal">
+					<script>
+						const form = document.getElementById('personalPage');
+									form.addEventListener('submit', (event) => {
+									// stop form submission
+										event.preventDefault();
+									});
+						 function timer(time,update,complete) {
+							var start = new Date().getTime();
+							var interval = setInterval(function() {
+								var now = time-(new Date().getTime()-start);
+								if( now <= 0) {
+									clearInterval(interval);
+									complete();
+								}
+								else update(Math.floor(now/1000));
+							},100); 
+						}
 
-				<!-- Main -->
-					<div id="main">
-						<!-- Elements -->
-						<h4>Team</h4>
-						<ul>
-							<li>Peach</li>
-							<li>Aaron</li>
-							<li>Meitsu</li>
-							<li>simo</li>
-							<li>better</li>
-						</ul>
-					</div>
+							timer(
+								3000,
+								function(timeleft) { 
+									document.getElementById('timer').innerHTML = timeleft;
+								},
+								function() { // what to do after
+									
+									form.submit();
+								}
+							);
+					</script>
 			</div>
 
 		<!-- BG -->

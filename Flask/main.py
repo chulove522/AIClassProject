@@ -1,5 +1,5 @@
-import random
-import unicodedata
+from operator import truediv
+from click import password_option
 from flask import Flask
 from flask import request
 from flask import redirect #直接定向，目前用不到
@@ -69,10 +69,15 @@ def register():
     return render_template("register.html")
 @app.route("/registerok", methods = ["POST"]) 
 def registerok():
+    global __islogin__ 
+    __islogin__= True
     username = request.form.get("username")
     nickname = request.form.get("nickname")
     useremail = request.form.get("email")
     password = request.form.get("password")
+    session["nickname"] = nickname
+    session["useremail"] = useremail
+    session["username"] = username
     likecategory = request.form.get("category")  #喜愛的類別 <= 這個之後再做
     sex = request.form["gender"]
     if sex==1:
@@ -101,10 +106,13 @@ def loginok():
         return render_template("error.html",errormsg=errordict[4]) #不是人
 #登入成功
     if mon.login(username,password):
+        global __islogin__ 
+        __islogin__= True
         result = mon.getadatabyusername(username)
         session["nickname"]=result["nickname"]
         session["useremail"] = result["useremail"]
         session["username"] = result["username"]
+        session["password"] = result["password"]
         #r="/personal"
         #?username="+username
         return redirect("/personal")
@@ -114,14 +122,18 @@ def loginok():
 #個人頁
 @app.route("/personal")
 def personal():
-    usermessage_ ="歡迎~"
-    if "nickname" in session:
+    #usermessage_ ="歡迎~"
+    global __islogin__
+    print("登入狀態:",__islogin__)
+    if __islogin__ == True:
         nickname_=session["nickname"]
         username_=session["username"]
         useremail_=session["useremail"]
-        return render_template("personal.html",name=nickname_,username=username_,email=useremail_,msg=usermessage_)
+        password_=session["password"]
+        return render_template("personal_new.html",name=nickname_,username=username_,email=useremail_,password =password_)
     else:
         #非法請求，直接導回首頁
+        print("登入狀態:",__islogin__)
         return redirect("/")
 #錯誤頁面
 errordict = {0:"沒這個帳號",1:"密碼錯了",2:"未知錯誤發生",3:"已經有此帳號存在，請勿重複註冊",4:"未勾選您不是機器人"}
@@ -136,6 +148,8 @@ def error():
 #登出
 @app.route("/signout")
 def signout():
+    global __islogin__
+    __islogin__= False
     #移除session，安全措施
     if(session.__getitem__) != None:
         del session["nickname"]
@@ -160,9 +174,15 @@ class TempArea:
         if name not in __name__.userlist:
             return render_template("register.html")
         return name
+    # ['Documentary', 'Comedy', 'TV', 'Movie', 'Music', 'Animation'=6,
+    #    'Thriller'=7, 'History', 'Fantasy', 'Adventure'=10, 'Mystery', 'Sci-Fi'=12,
+    #    'Western', 'Foreign', 'Action'=15, 'Family', 'Horror', 'Crime'=18, 'War',
+    #    'Romance'=20, 'Drama']
 
+
+    
 
 #啟動
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=80) #啟動server
+    app.run(debug=True, host="0.0.0.0", port=3000) #啟動server
 
