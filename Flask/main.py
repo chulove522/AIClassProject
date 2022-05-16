@@ -79,7 +79,7 @@ def registerok():
     session["useremail"] = useremail
     session["username"] = username
     likecategory = request.form.get("category")  #喜愛的類別 <= 這個之後再做
-    sex = request.form["gender"]
+    sex = request.form.get("gender")
     print(username, sex)
     #可能有錯
     if sex==1:
