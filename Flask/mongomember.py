@@ -1,4 +1,4 @@
-from asyncio.windows_events import NULL
+#from asyncio.windows_events import NULL
 import random, string
 from matplotlib import collections
 from matplotlib.collections import Collection
@@ -10,7 +10,7 @@ from pymongo.mongo_client import MongoClient
 from bson.objectid import ObjectId
 from flask import render_template
 #----------------基礎設置--------------#
-account = __password = client = memberdb = usercollection = NULL
+account = __password = client = memberdb = usercollection = 0
 #連線到資料庫
 def init():
     global account,__password,client,memberdb,usercollection

@@ -19,3 +19,4 @@ bin-release/
 AJAX-Movie-Recommendation-System-with-Sentiment-Analysis/
 The-Movie-Cinema/
 .venv/pyvenv.cfg
+Flask/.venv/
