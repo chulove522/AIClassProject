@@ -43,7 +43,7 @@ def index():
     lang = request.headers.get("accept-language") #瀏覽器的偏好語言
     if(lang.startswith("zh-TW")):
         print("語言偏好:繁中")
-        return render_template("index.html",name="陌生人")
+        return render_template("index.html",name="初次見面")
     else:
         print("語言偏好:英文or其他")
         return render_template("hello.html")
