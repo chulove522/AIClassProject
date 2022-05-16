@@ -80,7 +80,7 @@ def registerok():
     session["username"] = username
     likecategory = request.form.get("category")  #喜愛的類別 <= 這個之後再做
     sex = request.form["gender"]
-    print(sex)
+    print(username, sex)
     #可能有錯
     if sex==1:
         sex=0
@@ -111,7 +111,7 @@ def loginok():
         global __islogin__ 
         __islogin__= True
         result = mon.getadatabyusername(username)
-        session["nickname"]=result["nickname"]
+        session["nickname"] = result["nickname"]
         session["useremail"] = result["useremail"]
         session["username"] = result["username"]
         session["password"] = result["password"]
