@@ -81,13 +81,14 @@ def registerok():
     session["username"] = username
     session["password"] = password
     likecategory = request.form.get("category")  #喜愛的類別 <= 這個之後再做
-    sex = request.form.get("gender")
+    sex = request.form["gender"]
     print(username, sex)
-    #可能有錯
-    # if sex==0:
-    #     sex=0
-    # else:
-    #     sex=1
+    #男0女1
+    if sex == "male":
+        sex=0
+    else:
+        sex=1
+    print(username, sex)
     copy = request.form.get("copy") or""
     human= request.form.get("human") or""
     if human=="":
@@ -160,6 +161,7 @@ def signout():
         del session["username"]
         del session["useremail"]
         del session["password"]
+        del session["gender"]
     return redirect("/")
 #確認是否使用者已經登入
 @app.route("/islogin") #名字參數
