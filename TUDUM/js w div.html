@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js w div</title>
+</head>
+<body>
+     
+</body>
+</html>
+
+
+<!-- https://codertw.com/前端開發/262974/ -->
+
+
+<script>
+    <div id="parent"></div>
+        function addElementDiv(obj) {
+            var parent = document.getElementById(obj);
+            //新增 div
+            var div = document.createElement("div");
+            //設定 div 屬性，如 id
+            div.setAttribute("id", "newDiv");
+            div.innerHTML = "js 動態新增div";
+            parent.appendChild(div);
+        }
+
+        <ul id="parentUl"><li>原li</li></ul>
+            function addElementLi(obj) {
+                var ul = document.getElementById(obj);
+                //新增 li
+                var li = document.createElement("li");
+                //設定 li 屬性，如 id
+                li.setAttribute("id", "newli");
+                li.innerHTML = "js 動態新增li";
+                ul.appendChild(li);
+            }
+            
+        <ul id="parentUl"></ul>
+            function addElementImg(obj) {
+            var ul = document.getElementById(obj);
+            //新增 li
+            var li = document.createElement("li");
+            //新增 img
+            var img = document.createElement("img");
+            //設定 img 屬性，如 id
+            img.setAttribute("id", "newImg");
+            //設定 img 圖片地址
+            img.src = "/images/prod.jpg";
+            li.appendChild(img);
+            ul.appendChild(li);
+        }
+
+</script>
+
+呼叫：addElementDiv(“parent”);
+呼叫：addElementLi(“parentUl”);
+呼叫：addElementImg(“parentUl”);
+
+

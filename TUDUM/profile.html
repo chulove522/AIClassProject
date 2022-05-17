@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blank</title>
+    <title>您好，{{name}}!!</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -135,7 +135,21 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+                    <h1 class="h3 mb-4 text-gray-800">My Profile</h1>
+                    這是 {{name}} 的個人頁面
+                    <br />
+                    您的帳號是 {{username}}
+                    <br />
+                    您的信箱是 {{email}}
+                    <br />
+                    您說了 {{msg}}
+            
+                    <form action="/updateperson">
+                        <button>點我更改個人資料(這個功能還沒做好~)</button>
+                    </form>
+
+                    <li><a href="/signout" class="btn btn-outline-primary btn-xs">登出</a></li>
+                    <li><a href="/"  class="btn btn-outline-primary btn-xs">回主頁</a></li>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -243,3 +257,15 @@
 </body>
 
 </html>
+          
+          
+          
+          
+          
+          
+          
+          <!-- Sidebar Message -->
+            <div class="sidebar-card d-none d-lg-flex">
+                
+                <a class="btn btn-outline-gray btn-xs" href="index.html">Log out</a>
+            </div>

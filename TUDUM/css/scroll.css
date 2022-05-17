@@ -14,8 +14,11 @@
 .scroll-card {
     width: 200px;
     flex-shrink: 0;
+    border:0;
+    
 }
 
 .scroll-card img {
     width: 100%;
+    border-radius: 12px;
 }

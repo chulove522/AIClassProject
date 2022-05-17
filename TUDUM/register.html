@@ -36,7 +36,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" action="/robotalert" method="POST">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
@@ -63,45 +63,104 @@
                                 </div>
                                 <!-- preference -->
                                 <div class="field">
+
                                     <label for="category">喜好類型</label>
-                                    <select name="category ">
-                                        <option value="">-</option>
-                                        <option value="1">測試1</option>
-                                        <option value="2">測試2</option>
-                                        <option value="3">測試3</option>
-                                        <option value="4">測試4</option>
-                                    </select>
-                                </div>
-                                <div class="form-check">
-                                    <input type="radio" id="demo-priority-low" name="gender" checked>
-                                    <label for="demo-priority-low">男</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="radio" id="demo-priority-high" name="gender">
-                                    <label for="demo-priority-high">女</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" id="demo-human" name="human">
-                                    <label for="demo-human">我不是機器人</label>
-                                </div>
-                            </div>
-                            <ul class="actions">
-                                <li><input type="submit" value="Send Message" class="primary" /></li>
-                            </ul>
+                                    <div class="fields ">
+										<div class="form-check">
+											<input type="checkbox" id="ad" name="category" value="10">
+											<label for="ad">冒險</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="my" name="category" value="11">
+											<label for="my">神秘</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="ac" name="category" value="15">
+											<label for="ac">動作</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="horo" name="category" value="12">
+											<label for="horo">科幻片</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="fan" name="category" value="9">
+											<label for="fan">奇幻</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="cr" name="category" value="18">
+											<label for="cr">犯罪</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="anime" name="category" value="6">
+											<label for="anime">動畫片</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="ko" name="category" value="7">
+											<label for="ko">恐怖片</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="re" name="category" value="1">
+											<label for="re">紀錄片</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="com" name="category" value="2">
+											<label for="com">喜劇</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="tv" name="category" value="3">
+											<label for="tv">TV節目</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="mv" name="category" value="4">
+											<label for="mv">大眾電影</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="mu" name="category" value="5">
+											<label for="mu">音樂劇</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="hi" name="category" value="8">
+											<label for="hi">歷史</label>
+										</div>
+										<div class="form-check">
+											<input type="checkbox" id="ro" name="category" value="20">
+											<label for="ro">浪漫</label>
+										</div>
+									</div>
 
-                            <!--  -->
 
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
-                                <hr>
+
+                                    <label for="category">您的性別</label>
+                                    <div class="form-check">
+                                        <input type="radio" id="male" name="gender" checked>
+                                        <label for="male">男</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="female" name="gender">
+                                        <label for="female">女</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" id="demo-copy" name="copy">
+                                        <label for="demo-copy">傳送副本至我的信箱</label>
+                                    </div>
+                                    
+                                    <div class="form-check">
+                                        <input type="checkbox" id="demo-human" name="human" value="我不是機器人">
+                                        <label for="demo-human">我不是機器人</label>
+                                    </div>
+                                </div>
+
+                                <ul class="actions">
+                                    <li><input type="submit" value="Register Account" class="col-sm-11 btn btn-primary btn-user btn-block" /></li>
+                                </ul>
+                                    <hr>
                                 
                             </form>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
+                        </div>
+                        
+                            
+                            <div class="text-center mb-4">
+                                <a class="small " href="login.html">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
@@ -120,6 +179,34 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script type="text/javascript">
+        function robotalert(form)
+        {
+            cansubmit = true;
+            if(! $("#demo-human").prop("checked") ){ // 回傳布林值
+                alert( "你沒有勾選"+$("#demo-human").val() );
+                cansubmit = false;
+            }
+            if(document.getElementById('password').value ==""){ // 回傳布林值
+                alert( "你沒有設定密碼" );
+                cansubmit = false;
+            }
+            if(document.getElementById('username').value ==""  ){ // 回傳布林值
+                alert( "你沒有設定帳號" );
+                cansubmit = false;
+            }
+            if(document.getElementById('nickname').value =="" ){ // 回傳布林值
+                alert( "你沒有設定暱稱" );
+                cansubmit = false;
+            }
+            if(cansubmit){
+                alert( "檢查通過" );
+                
+                document.getElementById('submitbtn').disabled=false;// 變更按鈕為可用
+            }
+        }
+    </script>
 
 </body>
 
