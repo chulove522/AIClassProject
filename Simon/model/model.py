@@ -74,8 +74,9 @@ def update_user_similarity():
 
 
   
-#使用TMDB api去搜尋"最熱門的五個電影"
+#使用TMDB api去搜尋最流行的五個電影
 def movie_most_popular_TMDB():
+  movie = Movie()
   popular = movie.popular()
   id = []
   title = []
@@ -85,6 +86,7 @@ def movie_most_popular_TMDB():
   df = pd.DataFrame((zip(id, title)), columns = ['id', 'title'])
 #input TMDB movie id >>> output TOP5 popular movie dataframe
   return df
+movie_most_popular_TMDB()
   
   
 #使用TMDB api去推薦"最相關的五個電影"
@@ -138,7 +140,7 @@ def rcmd_by_genres(movie_id):
 #輸入電影id，使用overview去推薦五則電影  #12s
 #user_id為選擇性，不輸則為電影推薦，輸入則為個人化推薦
 def rcmd_by_ov(movie_id = 'Waiting to Exhale', user = 1):
-    meta = pd.read_csv('meta_cleaned.csv')
+    meta = pd.read_csv('meta_cleaned_n.csv')
     meta = meta.loc[:,['id', 'title', 'overview']]
     movie = Movie()
     result = pd.DataFrame()
