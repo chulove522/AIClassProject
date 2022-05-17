@@ -10,9 +10,29 @@ from scipy.spatial.distance import pdist, squareform
 from scipy.sparse.linalg import svds
 from sklearn.feature_extraction.text import CountVectorizer
 from itertools import permutations
+import json
+import requests
+from tmdbv3api import Movie
+from tmdbv3api import TMDb
+tmdb = TMDb()
+tmdb.api_key = '1807cdd6e32d6a41911062f2c73e24a9'
+tmdb.language = 'en'
+tmdb.debug = True
 
+#movie_id 轉換電影名稱
 
-    
+#def convert_2_title(id):
+#  movie = Movie()
+#  title = movie.details(id).title
+#  return title
+
+#電影名稱 轉換 id
+#def convert_2_id(title):
+#  response = requests.get('https://api.themoviedb.org/3/search/movie?api_key={}&language=en-US&query={}&page=1&include_adult=false'.format(tmdb.api_key, movie_title))
+#  data_json = response.json()
+#  return data_json['results'][0]['id']
+
+#用於讀取資料，在協同過濾和SVD會用到
 def load_data():
     ratings = pd.read_csv('ratings_renew.csv')
     ratings = ratings.loc[:,['userId', 'title', 'rating', 'movieId']]
@@ -29,18 +49,9 @@ def load_data():
     movie_ratings = user_ratings_table_normed.T
     return user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
     
-    
-def update_movie_most_popular():
-    ratings = pd.read_csv('ratings_t.csv')
-    movie_popularity = ratings["title"].value_counts()
-    popular_movies = movie_popularity[movie_popularity > 100].index
-    popular_movies_rankings =  ratings[ratings["title"].isin(popular_movies)]
-    result = popular_movies_rankings[["title", "rating"]].groupby('title').mean().sort_values(ascending=False, by="rating").head(10)
-    result.to_csv("result_of_mp.csv")
-
-        
-        
-        
+   
+#更新"電影-協同過濾"的資料，ratings_renew資料有變動才需更新
+#耗時 2min   
 def update_movie_similarity():
     user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
     # Generate the similarity matrix
@@ -48,7 +59,10 @@ def update_movie_similarity():
     # Wrap the similarities in a DataFrame
     movie_similarity = pd.DataFrame(similarities_m, index = movie_ratings.index, columns = movie_ratings.index)
     movie_similarity.to_csv("movie_similarity.csv")
-  
+    
+
+#更新"使用者-協同過濾"的資料，ratings_renew資料有變動才需更新
+#耗時 5min
 def update_user_similarity():
     user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
     # Generate the similarity matrix
@@ -57,30 +71,49 @@ def update_user_similarity():
     user_similarity = pd.DataFrame(similarities_u, index = user_ratings_table.index, columns = user_ratings_table.index)
     user_similarity.to_csv("user_similarity.csv")
     
-def rcmd_pairs(x):
-    pairs = pd.DataFrame(list(permutations(x.values, 2)),
-                       columns=['movie_a', 'movie_b'])
-    return pairs        
+
 
   
+#使用TMDB api去搜尋"最熱門的五個電影"
+def movie_most_popular_TMDB():
+  popular = movie.popular()
+  id = []
+  title = []
+  for i in range(5):
+    id.append(popular[i].id)
+    title.append(popular[i].title)
+  df = pd.DataFrame((zip(id, title)), columns = ['id', 'title'])
+#input TMDB movie id >>> output TOP5 popular movie dataframe
+  return df
+  
+  
+#使用TMDB api去推薦"最相關的五個電影"
+def movie_rcmd_TMDB(id):
+  movie = Movie()
+  recommendations = movie.recommendations(movie_id=id)
+  id = []
+  title = []
+  for i in range(5):
+    id.append(recommendations[i].id)
+    title.append(recommendations[i].title)
+  df = pd.DataFrame((zip(id, title)), columns = ['id', 'title'])
+#input TMDB movie id >>> output TOP5 similar movie dataframe
+  return df
 
-#more than 100 ratings & TOP10 average rating movies  # >>>moive
-def most_popular():
-    result = pd.read_csv('result_of_mp.csv')
-    return result.title
 
-
-#input movie name and number of recommend >> movie #搜尋耗時約5sec
-def rcmd_by_genres(targetmovie,k):
+#使用類別去推薦電影，可用於"相似的電影"
+#input movie id  >> movie #搜尋耗時約5sec
+def rcmd_by_genres(movie_id):
     genres = pd.read_csv('genres.csv',index_col=0)
+    movie = Movie()
     
 # targetmovie = 'war of the buttons'
-    if targetmovie not in genres.index:
+    if movie_id not in genres.index:
         print("Sorry! There is no movie recommend. ")
     else:
-        target = genres[genres.index==targetmovie]
+        target = genres[genres.index==movie_id]
         sub = genres.sample(frac=0.25,axis=0)
-        sub = sub.drop([targetmovie],errors = 'ignore')
+        sub = sub.drop([movie_id],errors = 'ignore')
         mer = pd.concat([sub,target])
 
     # Calculate all pairwise distances
@@ -92,23 +125,28 @@ def rcmd_by_genres(targetmovie,k):
     # Find the values for the target movie 
         jaccard_similarity_series = jaccard_similarity_df.iloc[-1]
     # Sort these values from highest to lowest
-        ordered_similarities = jaccard_similarity_series.sort_values(ascending=False)[1:k+1]
-      
-        return ordered_similarities
+        keys = jaccard_similarity_series.sort_values(ascending=False)[1:6].index
+        dicts = {}
+        for i in keys:
+          dicts[i] = movie.details(i).title
+        result = pd.DataFrame.from_dict(dicts, orient='index', columns=['title'])
+    #input TMDB movie id >>> output TOP5 similar movie dataframe
+        return result
         
 
-
-# 1.movie >> movie   2.user data >>> movie  #12s
-def rcmd_by_ov(targetmovie = 'Waiting to Exhale', user = 1):
+#使用overview去推薦電影，可用於"你可能會喜歡的電影"
+#輸入電影id，使用overview去推薦五則電影  #12s
+#user_id為選擇性，不輸則為電影推薦，輸入則為個人化推薦
+def rcmd_by_ov(movie_id = 'Waiting to Exhale', user = 1):
     meta = pd.read_csv('meta_cleaned.csv')
     meta = meta.loc[:,['id', 'title', 'overview']]
+    movie = Movie()
     result = pd.DataFrame()
-    nltk.download("stopwords")
+    # nltk.download("stopwords")
     if user == 1:
-    # targetmovie = 'Waiting to Exhale'
-      target = meta[meta.title==targetmovie]
+      target = meta[meta.id==movie_id]
       n = len(meta)//10000 + 1
-      indexNames = meta[(meta.title==targetmovie)].index
+      indexNames = meta[(meta.id==movie_id)].index
       stopset = set(stopwords.words('english'))
       for i in range(n):
         sub = meta.iloc[i*10000:(i+1)*10000]
@@ -119,26 +157,32 @@ def rcmd_by_ov(targetmovie = 'Waiting to Exhale', user = 1):
       # Fit and transform the plot column
         vectorized_data = vectorizer.fit_transform(mer['overview'])
       # Create Dataframe from TF-IDFarray and Assign the movie titles to the index and inspect
-        tfidf_df = pd.DataFrame(vectorized_data.toarray(), columns=vectorizer.get_feature_names_out(), index = mer['title'])
+        tfidf_df = pd.DataFrame(vectorized_data.toarray(), columns=vectorizer.get_feature_names_out(), index = mer['id'])
 
-
-        target_df = tfidf_df.loc[targetmovie, :]
+        target_df = tfidf_df.loc[movie_id, :]
 
       #   # Calculate the cosine_similarity and wrap it in a DataFrame
         similarity_array = cosine_similarity(target_df.values.reshape(1, -1), tfidf_df)
         similarity_df = pd.DataFrame(similarity_array.T, index=tfidf_df.index, columns=["similarity_score"])
 
       # # Sort the values from high to low by the values in the similarity_score
-        sorted_similarity_df = similarity_df.sort_values(by="similarity_score", ascending=False).iloc[1:5]
-        result = pd.concat([result,sorted_similarity_df])
-      return (result.sort_values(by = 'similarity_score', ascending = False).head())
+        sorted_similarity_df = similarity_df.sort_values(by="similarity_score", ascending=False).iloc[1:6]
+        keys = pd.concat([result,sorted_similarity_df]).index
+
+      dicts = {}
+      for i in keys:
+        dicts[i] = movie.details(i).title
+      result = pd.DataFrame.from_dict(dicts, orient='index', columns=['title'])
+    
+      return result
+    #input TMDB movie id >>> output TOP5 similar movie dataframe by overview
     else:
     #have a list
-      list_of_movies_enjoyed = ['Waiting to Exhale', 'Ruthless People', 'Robin and Marian']
-      target = meta.loc[meta['title'].isin(list_of_movies_enjoyed), :]
+      list_of_movies_enjoyed = [862, 8844, 15602, 31357, 96823]
+      target = meta.loc[meta['id'].isin(list_of_movies_enjoyed), :]
       result = pd.DataFrame()
       n = len(meta)//10000 + 1
-      indexNames = meta[(meta.title.isin(list_of_movies_enjoyed))].index
+      indexNames = meta[(meta.id.isin(list_of_movies_enjoyed))].index
     # nltk.download("stopwords")
       stopset = set(stopwords.words('english'))
       for i in range(n):
@@ -153,7 +197,7 @@ def rcmd_by_ov(targetmovie = 'Waiting to Exhale', user = 1):
       # Fit and transform the plot column
         vectorized_data = vectorizer.fit_transform(mer['overview'])
       # Create Dataframe from TF-IDFarray
-        tfidf_df = pd.DataFrame(vectorized_data.toarray(), columns=vectorizer.get_feature_names_out(), index = mer['title'])
+        tfidf_df = pd.DataFrame(vectorized_data.toarray(), columns=vectorizer.get_feature_names_out(), index = mer['id'])
         movies_enjoyed_df = tfidf_df.loc[list_of_movies_enjoyed, :]
         user_prof = movies_enjoyed_df.mean()
 
@@ -166,54 +210,20 @@ def rcmd_by_ov(targetmovie = 'Waiting to Exhale', user = 1):
 
       # Sort the values from high to low by the values in the similarity_score
         sorted_similarity_df = similarity_df.sort_values(by="similarity_score", ascending=False).iloc[0:5]
-        result = pd.concat([result,sorted_similarity_df])
-      return (result.sort_values(by = "similarity_score",ascending = False).head())
+        keys = pd.concat([result,sorted_similarity_df]).index
+
+      dicts = {}
+      for i in keys:
+        dicts[i] = movie.details(i).title
+      result = pd.DataFrame.from_dict(dicts, orient='index', columns=['title'])
+    #input TMDB movie id and user id >>> output TOP5 similar movie dataframe by overview
+      return result
 
 
 
 
-# 28s  movie >> movie
-def pair_rcmd(x):  
-    ratings = pd.read_csv('ratings_renew.csv', index_col=0)
-  # Apply the function to the title column and reset the index
-    movie_combinations = ratings.groupby('userId')['title'].apply(find_movie_pairs).reset_index(drop=True)
-
-  # Calculate how often each item in movies_a occurs with the items in movies_b
-    combination_counts = movie_combinations.groupby(['movie_a', 'movie_b']).size()
 
 
-
-  # Convert the results to a DataFrame and reset the index
-    combination_counts_df = combination_counts.to_frame(name='size').reset_index()
- 
-
-  # Sort the counts from highest to lowest
-    combination_counts_df.sort_values('size', ascending=False, inplace=True)
-
-  # Find the movies most frequently watched by people who watched "target"
-    df = combination_counts_df[combination_counts_df['movie_a'] == x]
-
-
-
-    return df.head(10)
-
-
-
-#Collaborative Filtering #52s
-def CbtF_byMovie(x):
-    user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
-
-  #相似電影預測 "電影id1"
-
-    movie_similarity = pd.read_csv('movie_similarity.csv', index_col=0)
-
-  # Find the similarity values for a specific movie
-    cosine_similarity_series = movie_similarity.loc[x]
-
-  # Sort these values highest to lowest
-    ordered_similarities = cosine_similarity_series.sort_values(ascending=False)
-
-    return ordered_similarities.iloc[1:6]
   
   
 #某人對某電影之預測 使用相似的人的平均  user, movie >> rate  #60s
@@ -235,6 +245,8 @@ def rcmd_user(u, m):
     return neighbor_ratings[m].mean()
 
 
+
+#CbtF_user 和 CbtF_movie 基本上功用是一致的，只是做法不同，用於推測某使用者未看過電影的評分，output為0~5之數值
 #user, movie >>> rate  #13s
 def CbtF_user(u, m):
     user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
@@ -287,7 +299,8 @@ def CbtF_movie(u, m):
 
 # user >>> movie #8s
 def SVD_rcmd(user_num):
-    load_data()
+    user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
+    movie = Movie()
     avg_ratings_pd = pd.Series(avg_ratings, index =user_ratings_table.index) 
     U = pd.read_csv('U_50.csv',index_col=0).to_numpy()
     sigma = pd.read_csv('sigma_50.csv',index_col=0).to_numpy()
@@ -307,10 +320,19 @@ def SVD_rcmd(user_num):
   # calc_pred_ratings_df = pd.read_csv('svd_50.csv')
     hasbeenseen = user_ratings_table.loc[user_num,:].dropna(inplace=False).index
     rcmd = calc_pred_ratings_df.loc[user_num,:][~user_ratings_table.columns.isin(hasbeenseen)].sort_values(ascending=False)
+    keys = rcmd.head().index
+    
+    link = pd.read_csv('link.csv', index_col=1)
+    dicts = {}
+    for i in keys:
+      dicts[i] = link.loc[i].title
+    result = pd.DataFrame.from_dict(dicts, orient='index', columns=['title'])
+    return result
+  #input user id >>> output TOP5 rcmd movie dataframe by SVD
+    
 
-    return rcmd.head()
 
-
+    
 
 
 
