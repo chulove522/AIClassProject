@@ -39,15 +39,16 @@ def index():
         nickname_ = session["nickname"]
         username_ = session["username"]
         return render_template("index.html",name=nickname_,user=username_)
+    return render_template("index.html",name="初次見面")
 
-    lang = request.headers.get("accept-language") #瀏覽器的偏好語言
-    if(lang.startswith("zh-TW")):
-        print("語言偏好:繁中")
-        return render_template("index.html",name="初次見面")
-    else:
-        print("語言偏好:英文or其他")
-        return render_template("hello.html")
-        #return redirect("hello")
+    # lang = request.headers.get("accept-language") #瀏覽器的偏好語言
+    # if(lang.startswith("zh-TW")):
+    #     print("語言偏好:繁中")
+    #     return render_template("index.html",name="初次見面")
+    # else:
+    #     print("語言偏好:英文or其他")
+    #     return render_template("hello.html")
+    #     #return redirect("hello")
 
 #搜尋
 @app.route("/search")
@@ -78,14 +79,15 @@ def registerok():
     session["nickname"] = nickname
     session["useremail"] = useremail
     session["username"] = username
+    session["password"] = password
     likecategory = request.form.get("category")  #喜愛的類別 <= 這個之後再做
     sex = request.form.get("gender")
     print(username, sex)
     #可能有錯
-    if sex==1:
-        sex=0
-    else:
-        sex=1
+    # if sex==0:
+    #     sex=0
+    # else:
+    #     sex=1
     copy = request.form.get("copy") or""
     human= request.form.get("human") or""
     if human=="":
@@ -157,6 +159,7 @@ def signout():
         del session["nickname"]
         del session["username"]
         del session["useremail"]
+        del session["password"]
     return redirect("/")
 #確認是否使用者已經登入
 @app.route("/islogin") #名字參數
@@ -193,5 +196,5 @@ class TempArea:
 
 #啟動
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=80) #啟動server
+    app.run(debug=True, host="0.0.0.0", port=3000) #啟動server
 
