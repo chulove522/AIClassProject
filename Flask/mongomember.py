@@ -28,8 +28,8 @@ def init():
     #選擇集合 csdb (comments and stars)
     cscollection = memberdb.cs
     print("已連線資料庫")
-init()
-print(usercollection)
+
+
 #資料放入集合中
 #----------------單一方法--------------#
 #找一筆會員資料

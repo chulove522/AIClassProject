@@ -1,5 +1,5 @@
-import numpy as np
 import pandas as pd
+import numpy as np
 import nltk
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -7,7 +7,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import jaccard_score
 from scipy.spatial.distance import pdist, squareform
-from scipy.sparse.linalg import svds
 from sklearn.feature_extraction.text import CountVectorizer
 from itertools import permutations
 import json
@@ -32,9 +31,14 @@ tmdb.debug = True
 #  data_json = response.json()
 #  return data_json['results'][0]['id']
 
+# 改成公有變數
+user_ratings_table = vg_ratings = user_ratings_table_normed = movie_ratings = 0
+
+
 #用於讀取資料，在協同過濾和SVD會用到
 def load_data():
-    ratings = pd.read_csv("./csvdatas/ratings_renew.csv")
+    global user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
+    ratings = pd.read_csv("./Flask/csvdatas/ratings_renew.csv")
     # print(ratings)
     ratings = ratings.loc[:,['userId', 'title', 'rating', 'movieId']]
     user_ratings_table = ratings.pivot(index = 'userId', columns = 'movieId', values= 'rating')
@@ -46,30 +50,35 @@ def load_data():
 
 # Fill in the missing data with 0s
     user_ratings_table_normed = user_ratings_table_centered.fillna(0)
-
+    
     movie_ratings = user_ratings_table_normed.T
     return user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
+
+
+load_data()
+print("初始化~~~只需一次load data")
+
 
 #更新"電影-協同過濾"的資料，ratings_renew資料有變動才需更新
 #耗時 2min   
 def update_movie_similarity():
-    user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
+    global user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
     # Generate the similarity matrix
     similarities_m = cosine_similarity(movie_ratings)
     # Wrap the similarities in a DataFrame
     movie_similarity = pd.DataFrame(similarities_m, index = movie_ratings.index, columns = movie_ratings.index)
-    movie_similarity.to_csv("./csvdatas/movie_similarity.csv")
+    movie_similarity.to_csv("./Flask/csvdatas/movie_similarity.csv")
     
 
 #更新"使用者-協同過濾"的資料，ratings_renew資料有變動才需更新
 #耗時 5min
 def update_user_similarity():
-    user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
+    global user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
     # Generate the similarity matrix
     similarities_u = cosine_similarity(user_ratings_table_normed)
     # Wrap the similarities in a DataFrame
     user_similarity = pd.DataFrame(similarities_u, index = user_ratings_table.index, columns = user_ratings_table.index)
-    user_similarity.to_csv("./csvdatas/user_similarity.csv")
+    user_similarity.to_csv("./Flask/csvdatas/user_similarity.csv")
     
 
 
@@ -82,30 +91,30 @@ def movie_most_popular_TMDB():
   title = []
   for i in range(5):
     id.append(popular[i].id)
-    title.append(popular[i].title)
-  df = pd.DataFrame((zip(id, title)), columns = ['id', 'title'])
-#input TMDB movie id >>> output TOP5 popular movie dataframe
-  return df
+    #title.append(popular[i].title)
+  #df = pd.DataFrame((zip(id, title)), columns = ['id', 'title'])
+  #input TMDB movie id >>> output TOP5 popular movie dataframe
+  return id
   
   
 #使用TMDB api去推薦"最相關的五個電影"
 def movie_rcmd_TMDB(id):
   movie = Movie()
-  recommendations = movie.recommendations(movie_id=id)
-  id = []
-  title = []
+  recommendations = movie.recommendations(id)
+  idlist = []
+  # title = []
   for i in range(5):
-    id.append(recommendations[i].id)
-    title.append(recommendations[i].title)
-  df = pd.DataFrame((zip(id, title)), columns = ['id', 'title'])
+    idlist.append(recommendations[i].id)
+    #title.append(recommendations[i].title)
+  #df = pd.DataFrame((zip(id, title)), columns = ['id', 'title'])
 #input TMDB movie id >>> output TOP5 similar movie dataframe
-  return df
+  return idlist
 
 
 #使用類別去推薦電影，可用於"相似的電影"
 #input movie id  >> movie #搜尋耗時約5sec
 def rcmd_by_genres(movie_id):
-    genres = pd.read_csv('./csvdatas/genres.csv',index_col=0)
+    genres = pd.read_csv('./Flask/csvdatas/genres.csv',index_col=0)
     movie = Movie()
     # targetmovie = 'war of the buttons'
     if movie_id not in genres.index:
@@ -134,13 +143,11 @@ def rcmd_by_genres(movie_id):
         return result
 
 
-rcmd_by_genres(69)
-
 #使用overview去推薦電影，可用於"你可能會喜歡的電影"
 #輸入電影id，使用overview去推薦五則電影  #12s
 #user_id為選擇性，不輸則為電影推薦，輸入則為個人化推薦
 def rcmd_by_ov(movie_id = 'Waiting to Exhale', user = 1):
-    meta = pd.read_csv('./csvdatas/meta_cleaned_n.csv')
+    meta = pd.read_csv('./Flask/csvdatas/meta_cleaned_n.csv')
     meta = meta.loc[:,['id', 'title', 'overview']]
     movie = Movie()
     result = pd.DataFrame()
@@ -230,7 +237,7 @@ def rcmd_by_ov(movie_id = 'Waiting to Exhale', user = 1):
   
 #某人對某電影之預測 使用相似的人的平均  user, movie >> rate  #60s
 def rcmd_user(u, m):
-    user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
+    global user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
     #相似使用者 使用者id7
     similarities_u = cosine_similarity(user_ratings_table_normed)
     user_similarities = pd.DataFrame(similarities_u, index = user_ratings_table.index, columns = user_ratings_table.index)
@@ -251,7 +258,7 @@ def rcmd_user(u, m):
 #CbtF_user 和 CbtF_movie 基本上功用是一致的，只是做法不同，用於推測某使用者未看過電影的評分，output為0~5之數值
 #user, movie >>> rate  #13s
 def CbtF_user(u, m):
-    user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
+    global user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
 
   # Drop the column you are trying to predict #答案 丟掉想預測的電影
 
@@ -278,7 +285,7 @@ def CbtF_user(u, m):
 
 #user, movie >>> rate #9s
 def CbtF_movie(u, m):
-  user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
+  global user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
 
   # Drop the column you are trying to predict #答案 丟掉想預測的人
   movie_ratings_droped = movie_ratings.drop(u, axis=1, inplace=False)
@@ -301,12 +308,12 @@ def CbtF_movie(u, m):
 
 # user >>> movie #8s
 def SVD_rcmd(user_num):
-    user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
+    global user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings 
     movie = Movie()
     avg_ratings_pd = pd.Series(avg_ratings, index =user_ratings_table.index) 
-    U = pd.read_csv('./csvdatas/U_50.csv',index_col=0).to_numpy()
-    sigma = pd.read_csv('./csvdatas/sigma_50.csv',index_col=0).to_numpy()
-    Vt = pd.read_csv('./csvdatas/Vt_50.csv',index_col=0).to_numpy()
+    U = pd.read_csv('./Flask/csvdatas/U_50.csv',index_col=0).to_numpy()
+    sigma = pd.read_csv('./Flask/csvdatas/sigma_50.csv',index_col=0).to_numpy()
+    Vt = pd.read_csv('./Flask/csvdatas/Vt_50.csv',index_col=0).to_numpy()
   # Dot product of U and sigma
     U_sigma = np.dot(U, sigma)
 
@@ -324,7 +331,7 @@ def SVD_rcmd(user_num):
     rcmd = calc_pred_ratings_df.loc[user_num,:][~user_ratings_table.columns.isin(hasbeenseen)].sort_values(ascending=False)
     keys = rcmd.head().index
     
-    link = pd.read_csv('./csvdatas/link.csv', index_col=1)
+    link = pd.read_csv('./Flask/csvdatas/link.csv', index_col=1)
     dicts = {}
     for i in keys:
       dicts[i] = link.loc[i].title

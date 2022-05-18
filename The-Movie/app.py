@@ -12,8 +12,8 @@ from datetime import date, datetime
 
 # load the nlp model and tfidf vectorizer from disk
 filename = 'nlp_model.pkl'
-clf = pickle.load(open(filename, 'rb'))
-vectorizer = pickle.load(open('tranform.pkl','rb'))
+clf = pickle.load(open('./The-Movie/nlp_model.pkl', 'rb'))
+vectorizer = pickle.load(open('./The-Movie/tranform.pkl','rb'))
 #載入模型
     
 # converting list of string to list (eg. "["abc","def"]" to ["abc","def"])
@@ -31,7 +31,7 @@ def convert_to_list_num(my_list):
     return my_list
 
 def get_suggestions():
-    data = pd.read_csv('main_data.csv')
+    data = pd.read_csv('./The-Movie/main_data.csv')
     return list(data['movie_title'].str.capitalize())
 
 app = Flask(__name__)
@@ -135,4 +135,4 @@ def recommend():
         vote_count=vote_count,release_date=release_date,movie_rel_date=movie_rel_date,curr_date=curr_date,runtime=runtime,status=status,genres=genres,movie_cards=movie_cards,reviews=movie_reviews,casts=casts,cast_details=cast_details)
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=80) #啟動server
+    app.run(debug=True, host="0.0.0.0", port=3500) #啟動server

@@ -9,6 +9,13 @@ from matplotlib.pyplot import text
 import mongomember as mon
 import json
 import model
+import urllib.request
+from datetime import date, datetime
+import numpy as np
+import pandas as pd
+import bs4 as bs  #beautiful soup user review用
+import pickle #載入自然語言模型檔案
+
 
 # 靜態路由設定
 app = Flask(__name__,
@@ -41,8 +48,8 @@ def index():
     if(__islogin__):
         nickname_ = session["nickname"]
         username_ = session["username"]
-        return render_template("index.html", name=nickname_, user=username_)
-    return render_template("index.html", name="初次見面")
+        return render_template("index copy.html", name=nickname_, user=username_)
+    return render_template("index copy.html", name="初次見面")
 
     # lang = request.headers.get("accept-language") #瀏覽器的偏好語言
     # if(lang.startswith("zh-TW")):
@@ -241,10 +248,155 @@ def recommendByCatogory(movieid):
     #input TMDB movie id >>> output TOP5 similar movie dataframe
     print(result)
 
-recommendByCatogory(123)
+#recommendByCatogory(69) #為何每次推薦的結果都不同?
 
+#---------------------印度人專區----------------------#
 
+# load the nlp model and tfidf vectorizer from disk
+# 載入自然語言模型檔案
+filename = 'nlp_model.pkl'
+clf = pickle.load(open("./Flask/nlp_model.pkl", 'rb'))   #binary format for reading
+vectorizer = pickle.load(open('./Flask/tranform.pkl','rb'))
 
+# ----------------------跟js網頁溝通----------------------#
+@app.route("/recommend",methods=["POST"])
+def recommend():
+    # getting data from AJAX request
+    title = request.form['title']
+    cast_ids = request.form['cast_ids']
+    cast_names = request.form['cast_names']
+    cast_chars = request.form['cast_chars']
+    cast_bdays = request.form['cast_bdays']
+    cast_bios = request.form['cast_bios']
+    cast_places = request.form['cast_places']
+    cast_profiles = request.form['cast_profiles']
+    imdb_id = request.form['imdb_id']
+    poster = request.form['poster']
+    genres = request.form['genres']
+    overview = request.form['overview']
+    vote_average = request.form['rating']
+    vote_count = request.form['vote_count']
+    rel_date = request.form['rel_date']
+    release_date = request.form['release_date']
+    runtime = request.form['runtime']
+    status = request.form['status']
+    rec_movies = request.form['rec_movies']
+    rec_posters = request.form['rec_posters']
+    rec_movies_org = request.form['rec_movies_org']
+    rec_year = request.form['rec_year']
+    rec_vote = request.form['rec_vote']
+
+    # get movie suggestions for auto complete
+    suggestions = get_suggestions()
+
+    # call the convert_to_list function for every string that needs to be converted to list
+    rec_movies_org = convert_to_list(rec_movies_org)
+    rec_movies = convert_to_list(rec_movies)
+    rec_posters = convert_to_list(rec_posters)
+    cast_names = convert_to_list(cast_names)
+    cast_chars = convert_to_list(cast_chars)
+    cast_profiles = convert_to_list(cast_profiles)
+    cast_bdays = convert_to_list(cast_bdays)
+    cast_bios = convert_to_list(cast_bios)
+    cast_places = convert_to_list(cast_places)
+    
+    # convert string to list (eg. "[1,2,3]" to [1,2,3])
+    cast_ids = convert_to_list_num(cast_ids)
+    rec_vote = convert_to_list_num(rec_vote)
+    rec_year = convert_to_list_num(rec_year)
+    
+    # rendering the string to python string
+    for i in range(len(cast_bios)):
+        cast_bios[i] = cast_bios[i].replace(r'\n', '\n').replace(r'\"','\"')
+
+    for i in range(len(cast_chars)):
+        cast_chars[i] = cast_chars[i].replace(r'\n', '\n').replace(r'\"','\"') 
+    
+    # combining multiple lists as a dictionary which can be passed to the html file so that it can be processed easily and the order of information will be preserved
+    movie_cards = {rec_posters[i]: [rec_movies[i],rec_movies_org[i],rec_vote[i],rec_year[i]] for i in range(len(rec_posters))}
+
+    casts = {cast_names[i]:[cast_ids[i], cast_chars[i], cast_profiles[i]] for i in range(len(cast_profiles))}
+
+    cast_details = {cast_names[i]:[cast_ids[i], cast_profiles[i], cast_bdays[i], cast_places[i], cast_bios[i]] for i in range(len(cast_places))}
+
+    # web scraping to get user reviews from IMDB site
+    sauce = urllib.request.urlopen('https://www.imdb.com/title/{}/reviews?ref_=tt_ov_rt'.format(imdb_id)).read()
+    soup = bs.BeautifulSoup(sauce,'lxml')
+    soup_result = soup.find_all("div",{"class":"text show-more__control"})
+
+    reviews_list = [] # list of reviews
+    reviews_status = [] # list of comments (good or bad)
+    for reviews in soup_result:
+        if reviews.string:
+            reviews_list.append(reviews.string)
+            # passing the review to our model
+            movie_review_list = np.array([reviews.string])
+            movie_vector = vectorizer.transform(movie_review_list)
+            pred = clf.predict(movie_vector)
+            reviews_status.append('Positive' if pred else 'Negative')
+
+    # getting current date
+    movie_rel_date = ""
+    curr_date = ""
+    if(rel_date):
+        today = str(date.today())
+        curr_date = datetime.strptime(today,'%Y-%m-%d')
+        movie_rel_date = datetime.strptime(rel_date, '%Y-%m-%d')
+
+    # combining reviews and comments into a dictionary
+    movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))}     
+
+    # passing all the data to the html file
+    return render_template('recommend copy.html',title=title,poster=poster,overview=overview,
+        vote_average=vote_average, #平均分
+        vote_count=vote_count, #投票人數
+        release_date=release_date,
+        movie_rel_date=movie_rel_date,
+        curr_date=curr_date,
+        runtime=runtime, #片長
+        status=status,  #已上映
+        genres=genres,  #類別
+        movie_cards=movie_cards,
+        reviews=movie_reviews,
+        casts=casts,
+        cast_details=cast_details)
+
+#印度人轉list的方法，程式中常會用到
+# converting list of string to list (eg. "["abc","def"]" to ["abc","def"])
+def convert_to_list(my_list):
+    my_list = my_list.split('","')
+    my_list[0] = my_list[0].replace('["','')
+    my_list[-1] = my_list[-1].replace('"]','')
+    return my_list
+
+# convert list of numbers to list (eg. "[1,2,3]" to [1,2,3])
+def convert_to_list_num(my_list):
+    my_list = my_list.split(',')
+    my_list[0] = my_list[0].replace("[","")
+    my_list[-1] = my_list[-1].replace("]","")
+    return my_list
+
+# 熱門推薦*5 (來自tmdb)
+def get_suggestionsx5():
+    # data = pd.read_csv('main_data.csv')  #要改
+    # return list(data['movie_title'].str.capitalize())
+    idlist = model.movie_most_popular_TMDB()  #['id']
+    print("------------>")
+    for i in idlist:
+        print("熱門推薦*5",i)
+
+#相關推薦*5 (來自tmdb)
+def get_recdx5(movieid):
+    idlist = model.movie_rcmd_TMDB(movieid)  #['id']
+    print("------------>")
+    for i in idlist:
+        print("相關推薦*5:",i)
+
+# get_suggestionsx5()
+
+# get_recdx5(169)
+
+# 
 # 暫時放置區
 class TempArea:
     @app.route("/getid")
