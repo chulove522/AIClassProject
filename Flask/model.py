@@ -34,12 +34,8 @@ tmdb.debug = True
 
 #用於讀取資料，在協同過濾和SVD會用到
 def load_data():
-<<<<<<< Updated upstream
     ratings = pd.read_csv("./csvdatas/ratings_renew.csv")
     # print(ratings)
-=======
-    ratings = pd.read_csv('./csvdatas/ratings_renew.csv')
->>>>>>> Stashed changes
     ratings = ratings.loc[:,['userId', 'title', 'rating', 'movieId']]
     user_ratings_table = ratings.pivot(index = 'userId', columns = 'movieId', values= 'rating')
 # Get the average rating for each user 
@@ -136,15 +132,9 @@ def rcmd_by_genres(movie_id):
         result = pd.DataFrame.from_dict(dicts, orient='index', columns=['title'])
     #input TMDB movie id >>> output TOP5 similar movie dataframe
         return result
-<<<<<<< Updated upstream
 
 
 rcmd_by_genres(69)
-=======
-        
-rcmd_by_genres(69)
-
->>>>>>> Stashed changes
 
 #使用overview去推薦電影，可用於"你可能會喜歡的電影"
 #輸入電影id，使用overview去推薦五則電影  #12s
