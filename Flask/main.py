@@ -161,6 +161,7 @@ def signout():
         del session["username"]
         del session["useremail"]
         del session["password"]
+        del session["gender"]
     return redirect("/")
 
 #確認是否使用者已經登入
