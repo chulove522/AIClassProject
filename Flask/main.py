@@ -8,6 +8,7 @@ from flask import render_template
 from matplotlib.pyplot import text
 import mongomember as mon
 import json
+import model
 
 # 靜態路由設定
 app = Flask(__name__,
@@ -232,6 +233,16 @@ def listcollect(username):
     collectlist = mon.setUserStar(username)
     for i in collectlist:
         print(i)
+
+#---------------------------推薦--------------------------#
+#使用類別去推薦電影，可用於"相似的電影"
+def recommendByCatogory(movieid):
+    result = model.rcmd_by_genres(movieid)
+    #input TMDB movie id >>> output TOP5 similar movie dataframe
+    print(result)
+
+recommendByCatogory(69)
+
 
 
 # 暫時放置區
