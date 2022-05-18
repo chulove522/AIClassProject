@@ -1,78 +1,74 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>註冊完成</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
-		<!-- Wrapper -->
-			<div id="wrapper">
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="icon fa-gem"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>只是想跟您說...歡迎光臨!</h1>
-								<p>3秒後導向到個人頁面</p>
-								<div id="timer">
-
-								</div>
-							</div>
-							<!-------------導向----------->
-							<form method="get" action="/personal" id="personalPage">
-								<input type="submit">
-							</form>
-							<!---
-							<input type="submit" id="personalPage" formmethod="get" formaction="/personal">
+    <head>
+        <title>註冊完成</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="/assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+    </head>
+    <body class="is-preload">
+        <!-- Wrapper -->
+        <div id="wrapper">
+            <!-- Header -->
+            <header id="header">
+                <div class="logo">
+                    <span class="icon fa-gem"></span>
+                </div>
+                <div class="content">
+                    <div class="inner">
+                        <h1>只是想跟您說...歡迎光臨!</h1>
+                        <p>3秒後導向到個人頁面</p>
+                        <div id="timer"></div>
+                    </div>
+                    <!-------------導向----------->
+                    <form method="get" action="/indexuser" id="indexuserPage">
+                        <input type="submit" />
+                    </form>
+                    <!---
+							<input type="submit" id="indexuserPage" formmethod="get" formaction="/indexuser">
 							<-------------------------------->
+                </div>
+            </header>
+            <script>
+                const form = document.getElementById("indexuserPage");
+                form.addEventListener("submit", (event) => {
+                    // stop form submission
+                    event.preventDefault();
+                });
+                function timer(time, update, complete) {
+                    var start = new Date().getTime();
+                    var interval = setInterval(function () {
+                        var now = time - (new Date().getTime() - start);
+                        if (now <= 0) {
+                            clearInterval(interval);
+                            complete();
+                        } else update(Math.floor(now / 1000));
+                    }, 100);
+                }
 
-						</div>
-					</header>
-					<script>
-						const form = document.getElementById('personalPage');
-									form.addEventListener('submit', (event) => {
-									// stop form submission
-										event.preventDefault();
-									});
-						 function timer(time,update,complete) {
-							var start = new Date().getTime();
-							var interval = setInterval(function() {
-								var now = time-(new Date().getTime()-start);
-								if( now <= 0) {
-									clearInterval(interval);
-									complete();
-								}
-								else update(Math.floor(now/1000));
-							},100); 
-						}
+                timer(
+                    3000,
+                    function (timeleft) {
+                        document.getElementById("timer").innerHTML = timeleft;
+                    },
+                    function () {
+                        // what to do after
 
-							timer(
-								3000,
-								function(timeleft) { 
-									document.getElementById('timer').innerHTML = timeleft;
-								},
-								function() { // what to do after
-									
-									form.submit();
-								}
-							);
-					</script>
-			</div>
+                        form.submit();
+                    }
+                );
+            </script>
+        </div>
 
-		<!-- BG -->
-			<div id="bg"></div>
+        <!-- BG -->
+        <div id="bg"></div>
 
-		<!-- Scripts -->
-			<script src="/assets/js/jquery.min.js"></script>
-			<script src="/assets/js/browser.min.js"></script>
-			<script src="/assets/js/breakpoints.min.js"></script>
-			<script src="/assets/js/util.js"></script>
-			<script src="/assets/js/main.js"></script>
-
-	</body>
+        <!-- Scripts -->
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/browser.min.js"></script>
+        <script src="/assets/js/breakpoints.min.js"></script>
+        <script src="/assets/js/util.js"></script>
+        <script src="/assets/js/main.js"></script>
+    </body>
 </html>
