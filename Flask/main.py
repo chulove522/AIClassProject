@@ -162,6 +162,7 @@ def signout():
         del session["useremail"]
         del session["password"]
     return redirect("/")
+
 #確認是否使用者已經登入
 @app.route("/islogin") #名字參數
 def islogin():
@@ -169,7 +170,37 @@ def islogin():
         return True
     else:
         return False
-        
+
+#按星星.........
+@app.route("/star")
+def star(userid,movieid,stars):
+    return 0
+    
+#送出評論................
+@app.route("/comments")
+def comments(userid,movieid,comments):
+    return 0
+#先不做了感覺沒時間
+
+#增加到喜好列表......
+@app.route("/collect")
+def collect(userid, movieid):
+    status = mon.setUsercollectList(userid, movieid)
+    if status==0:
+        print("取消收藏")
+    elif status ==1:
+        print("早就收藏過拉~")
+    elif status ==2:
+        print("加入收藏~")
+    return 0
+#列出這個人所有的收藏......
+def listcollect(username):
+    collectlist = mon.setUserStar(username)
+    for i in collectlist:
+        print(i)
+
+
+
 #暫時放置區
 class TempArea:
     @app.route("/getid")
