@@ -96,42 +96,42 @@
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
-                                    Alerts Center
+                                    來自 AI 的呼喚
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
+                                        <div class="icon-circle bg-info">
+                                            <i class="fa-regular fa-hand-peace"></i>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        <div class="small text-gray-500">May 20, 2022</div>
+                                        <span class="font-weight-bold">今天想看部好電影嗎？肚子餓了想吃牛排嗎？</span>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
+                                            <i class="fa-regular fa-calendar-check"></i>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
+                                        <div class="small text-gray-500">May 17, 2022</div>
+                                        Somehow, someday 課程就結束了
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                            <i class="fa-solid fa-skull-crossbones"></i>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
+                                        <div class="small text-gray-500">May 16, 2022</div>
+                                        Better call Eason!
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All</a>
                             </div>
                         </li>
 
@@ -141,7 +141,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid ">
+                <div class="container-fluid" style="overflow-y: visible">
 
                     <!-- carousel -->
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -195,72 +195,72 @@
                     <!-- Content Row -->
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-3 mb-4">
                         <div class="movie-scroller rowContainer" id = movie-scroller>
-                            <h1 class="h3 ml-4 mt-5 mb-4 text-gray-800">專屬於你的推薦</h1>
+                            <h1 class="h3 ml-4 mt-5 mb-4 text-gray-800">{{header}}</h1>
                                 <div class="container-fluid">
                                     <div class="scroll-wrap">
                                         <div class="card-group">
-                                            <div class="card scroll-card ">
+                                            <div class="card scroll-card d-flex">
                                                 <img src="https://picsum.photos/400/300?random=1" alt="">
                                                 <a href="movie1.html" class="stretched-link zindex "></a>
-                                                <h3>title</h3>
+                                                <h5>Turning Red</h5>
                                 
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, labore.</p>
+                                                <p>2022</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class=" card scroll-card">
                                                 <img src="https://picsum.photos/400/300?random=2" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h3>title</h3>
-                                                <p>Deserunt excepturi ex natus modi laborum eligendi architecto aperiam odit.</p>
+                                                <h5>{{title}}</h5>
+                                                <p>{{year}}</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
                                                 <img src="https://picsum.photos/400/300?random=3" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h3>title</h3>
-                                                <p>Ab ducimus rerum deleniti quo temporibus veritatis et illo aut.</p>
+                                                <h5>{{title}}</h5>
+                                                <p>{{year}}</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
                                                 <img src="https://picsum.photos/400/300?random=4" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h3>title</h3>
-                                                <p>Officiis doloremque beatae incidunt, veniam officia vitae repellendus dolore nesciunt?</p>
+                                                <h5>{{title}}</h5>
+                                                <p>{{year}}</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
                                                 <img src="https://picsum.photos/400/300?random=5" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h3>title</h3>
-                                                <p>Dolorum, maxime temporibus rem repudiandae recusandae iste inventore quidem provident!</p>
+                                                <h5>{{title}}</h5>
+                                                <p>{{year}}</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
                                                 <img src="https://picsum.photos/400/300?random=6" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h3>title</h3>
-                                                <p>Aut dolores ex sed atque, ea tempora unde doloremque veniam?</p>
+                                                <h5>{{title}}</h5>
+                                                <p>{{year}}</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
                                                 <img src="https://picsum.photos/400/300?random=7" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h3>title</h3>
-                                                <p>Quos esse natus alias sequi mollitia dolorem corrupti itaque quam.</p>
+                                                <h5>{{title}}</h5>
+                                                <p>{{year}}</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
                                                 <img src="https://picsum.photos/400/300?random=8" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h3>title</h3>
-                                                <p>Soluta illo dolorem facere, consequatur tenetur facilis? Recusandae, ipsum aliquam!</p>
+                                                <h5>{{title}}</h5>
+                                                <p>{{year}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -296,7 +296,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-text mx-3">TUDUM</div>
+                <div class="sidebar-brand-text mx-2">TUDUM</div>
             </a>
 
             <!-- Divider -->
@@ -304,55 +304,33 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="profile.html" role="button">
                     <div>
                         <img class="img-profile rounded-circle"
                         src="img/undraw_profile.svg">
                     </div>
-                    <p class="mr-2 d-none d-lg-inline text-gray-100 large">Elon Musk</p>
+                    <h6 id="name" class="d-none d-lg-inline text-gray-100">Moviegoer?</h6>
                 </a>
             </li>
             
             <!-- Divider -->
             <hr class="sidebar-divider">
+            <br>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item justify-content-center">
-                <a class="nav-link" href="watched.html">
-                    <div class="user-list">
-                        <span>我看過的電影</span>
-                        <h3>{}</h3>
-                    </div>
-                </a>
-                
-                <a class="nav-link" href="comment.html">
-                    <div class="user-list">
-                        <span>我的評論</span>
-                        <h3>{}</h3>
-                    </div>
+            <div class=" btn-light">
+
+                <a class="dropdown-item" href="login.html" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Log In
                 </a>
 
-                <a class="nav-link" href="list.html">
-                    <div class="user-list">
-                        <span>我的片單</span>
-                        <h3>{}</h3>
-                    </div>
-                </a>
 
-                <a class="nav-link" href="towatched.html">
-                    <div class="user-list">
-                        <span>待觀看</span>
-                        <h3>{}</h3>
-                    </div>
-                </a>
+            </div>
 
-            </li>
+            
 
-           
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+        
 
             
         </ul>

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>您好，{{name}}!!</title>
+    <title>您好!</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -118,7 +118,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">May 16, 2019</div>
+                                        <div class="small text-gray-500">May 16, 2022</div>
                                         Better call Eason!
                                     </div>
                                 </a>
@@ -134,8 +134,15 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                    <div>
+                        <a href="javascript:history.back()" class="btn btn-light btn-xs "><i class="fa-solid fa-arrow-left"> </i></a>
+                    </div>
+                    <br>
+
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">My Profile</h1>
+
+                    
                     這是 {{name}} 的個人頁面
                     <br />
                     您的帳號是 {{username}}
@@ -147,9 +154,32 @@
                     <form action="/updateperson">
                         <button>點我更改個人資料(這個功能還沒做好~)</button>
                     </form>
+                    <br>
 
-                    <li><a href="/signout" class="btn btn-outline-primary btn-xs">登出</a></li>
-                    <li><a href="/"  class="btn btn-outline-primary btn-xs">回主頁</a></li>
+
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                    </a>
+
+                     <!-- Logout Modal-->
+                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">愛看電影的你要走了嗎?</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">每場相遇都不容易，謝謝有你～</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                                    <a class="btn btn-primary" href="login.html">登出</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -174,7 +204,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="indexuser.html">
                 <div class="sidebar-brand-text mx-3">TUDUM</div>
             </a>
 
@@ -182,19 +212,13 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - User Information -->
-            <li class="nav-item">
-                <a class="nav-link" href="/profile.html" id="user" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="userinfo">
-                        <a href="/profile.html">
-                        <img class="img-profile rounded-circle mb-4 mx-auto d-block "
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link" href="profile.html" role="button">
+                    <div>
+                        <img class="img-profile rounded-circle"
                         src="img/undraw_profile.svg">
-                        <div>
-                        </div>
-                        </a>
                     </div>
-                    <h3 id="name">{}</h3>
-
+                    <h6 id="name" class="d-none d-lg-inline text-gray-100">{{username}}</h6>
                 </a>
             </li>
 
@@ -202,37 +226,35 @@
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item justify-content-center">
                 <a class="nav-link" href="watched.html">
                     <div class="user-list">
                         <span>我看過的電影</span>
-                        <h3 id="watched">{}</h3>
+                        <h4 id="movie">{{movie}}</h4>
                     </div>
                 </a>
                 
                 <a class="nav-link" href="comment.html">
                     <div class="user-list">
                         <span>我的評論</span>
-                        <h3 id="comment">{}</h3>
+                        <h4 id="comment">{{comment}}</h4>
                     </div>
                 </a>
-                <div class="sidebar-list align-items-center  ">
-                    <a class="nav-link" href="list.html">
-                        <div class="user-list">
-                            <span>我的片單</span>
-                            <h3 id="list">{}</h3>
-                        </div>
-                    </a>
 
-                </div>
-                
+                <a class="nav-link" href="list.html">
+                    <div class="user-list">
+                        <span>我的片單</span>
+                        <h4 id="list">{{list}}</h4>
+                    </div>
+                </a>
 
-                <a class="nav-link" href="towatched.html">
+                <a class="nav-link" href="save.html">
                     <div class="user-list">
                         <span>待觀看</span>
-                        <h3 id="save">{}</h3>
+                        <h4 id="save">{{save}}</h4>
                     </div>
                 </a>
+
             </li>
 
             <!-- Divider -->
@@ -240,7 +262,7 @@
 
         </ul>
         <!-- End of Sidebar -->
-
+                
     </div>
     <!-- End of Page Wrapper -->
 
@@ -258,14 +280,4 @@
 
 </html>
           
-          
-          
-          
-          
-          
-          
-          <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                
-                <a class="btn btn-outline-gray btn-xs" href="index.html">Log out</a>
-            </div>
+  
