@@ -305,9 +305,9 @@ def SVD_rcmd(user_num):
     user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
     movie = Movie()
     avg_ratings_pd = pd.Series(avg_ratings, index =user_ratings_table.index) 
-    U = pd.read_csv('U_50.csv',index_col=0).to_numpy()
-    sigma = pd.read_csv('sigma_50.csv',index_col=0).to_numpy()
-    Vt = pd.read_csv('Vt_50.csv',index_col=0).to_numpy()
+    U = pd.read_csv('./csvdatas/U_50.csv',index_col=0).to_numpy()
+    sigma = pd.read_csv('./csvdatas/sigma_50.csv',index_col=0).to_numpy()
+    Vt = pd.read_csv('./csvdatas/Vt_50.csv',index_col=0).to_numpy()
   # Dot product of U and sigma
     U_sigma = np.dot(U, sigma)
 
@@ -325,7 +325,7 @@ def SVD_rcmd(user_num):
     rcmd = calc_pred_ratings_df.loc[user_num,:][~user_ratings_table.columns.isin(hasbeenseen)].sort_values(ascending=False)
     keys = rcmd.head().index
     
-    link = pd.read_csv('link.csv', index_col=1)
+    link = pd.read_csv('./csvdatas/link.csv', index_col=1)
     dicts = {}
     for i in keys:
       dicts[i] = link.loc[i].title
