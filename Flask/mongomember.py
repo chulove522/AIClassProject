@@ -230,7 +230,7 @@ def setUserStar(username, movieid, star):
         print("user並沒有收藏該電影")
    
     
-setUserStar("test",2000,5)
+#setUserStar("test",2000,5)
 
 #找所有符合該條件的 蒐集該內容
 # find = "note1"
