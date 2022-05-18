@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>javascript div</title>
+<script>
+    window.onload=function () {
+        var Odiv=document.createElement("div");             //创建一个div
+        var Ospan=document.createElement("span");          //创建一个span
+        Odiv.style.cssText="width:200px;height:200px;background:#636363;text-align:center;line-height: 220px";    //创建div的css样式
+        //Odiv.id="box";                            //创建div的id为box
+        //Odiv.className="Box";                    //div的class为Box
+        Odiv.appendChild(Ospan);            //在div内创建一个span
+        document.body.appendChild(Odiv);        //在body内创建一个div 
+    }
+</script>
+</head>
+<body>
+</body>
+</html>
