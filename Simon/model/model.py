@@ -262,7 +262,7 @@ def CbtF_user(u, m):
     return user_user_pred
 
 
-user, movie >>> rate #9s
+#user, movie >>> rate #9s
 def CbtF_movie(u, m):
   user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
 
@@ -287,7 +287,7 @@ def CbtF_movie(u, m):
 
 # user >>> movie #8s
 def SVD_rcmd(user_num):
-    user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings = load_data() 
+    load_data()
     avg_ratings_pd = pd.Series(avg_ratings, index =user_ratings_table.index) 
     U = pd.read_csv('U_50.csv',index_col=0).to_numpy()
     sigma = pd.read_csv('sigma_50.csv',index_col=0).to_numpy()
