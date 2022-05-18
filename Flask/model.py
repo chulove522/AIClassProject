@@ -34,8 +34,12 @@ tmdb.debug = True
 
 #用於讀取資料，在協同過濾和SVD會用到
 def load_data():
+<<<<<<< Updated upstream
     ratings = pd.read_csv("./csvdatas/ratings_renew.csv")
     # print(ratings)
+=======
+    ratings = pd.read_csv('./csvdatas/ratings_renew.csv')
+>>>>>>> Stashed changes
     ratings = ratings.loc[:,['userId', 'title', 'rating', 'movieId']]
     user_ratings_table = ratings.pivot(index = 'userId', columns = 'movieId', values= 'rating')
 # Get the average rating for each user 
@@ -50,7 +54,6 @@ def load_data():
     movie_ratings = user_ratings_table_normed.T
     return user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
 
-load_data()
 #更新"電影-協同過濾"的資料，ratings_renew資料有變動才需更新
 #耗時 2min   
 def update_movie_similarity():
@@ -108,8 +111,7 @@ def movie_rcmd_TMDB(id):
 def rcmd_by_genres(movie_id):
     genres = pd.read_csv('./csvdatas/genres.csv',index_col=0)
     movie = Movie()
-    
-# targetmovie = 'war of the buttons'
+    # targetmovie = 'war of the buttons'
     if movie_id not in genres.index:
         print("Sorry! There is no movie recommend. ")
     else:
@@ -134,9 +136,15 @@ def rcmd_by_genres(movie_id):
         result = pd.DataFrame.from_dict(dicts, orient='index', columns=['title'])
     #input TMDB movie id >>> output TOP5 similar movie dataframe
         return result
+<<<<<<< Updated upstream
 
 
 rcmd_by_genres(69)
+=======
+        
+rcmd_by_genres(69)
+
+>>>>>>> Stashed changes
 
 #使用overview去推薦電影，可用於"你可能會喜歡的電影"
 #輸入電影id，使用overview去推薦五則電影  #12s

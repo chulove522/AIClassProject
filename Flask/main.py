@@ -241,7 +241,7 @@ def recommendByCatogory(movieid):
     #input TMDB movie id >>> output TOP5 similar movie dataframe
     print(result)
 
-recommendByCatogory(69)
+recommendByCatogory(123)
 
 
 
