@@ -51,9 +51,9 @@ def getadatabyusername(uname):
 #新增一筆會員
 def newamember(username,password,nick,useremail,age,gender,level):
     if not getaexistbyusername(username):
-        if gender == 0:
+        if gender==0:
             gender ="male"
-        elif gender == 1:
+        elif gender==1:
             gender ="female"
         elif gender=="male" or gender=="female":pass
         else:print("性別不正確")

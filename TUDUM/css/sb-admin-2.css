@@ -6875,6 +6875,7 @@ a.close.disabled {
   position: relative;
   width: 100%;
   overflow: hidden;
+  display: flex;
 }
 
 .carousel-inner::after {
@@ -6886,7 +6887,7 @@ a.close.disabled {
 .carousel-item {
   position: relative;
   display: none;
-  float: left;
+  float: 100%;
   width: 100%;
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
