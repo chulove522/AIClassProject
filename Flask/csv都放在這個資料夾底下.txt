@@ -1,0 +1,12 @@
+movie_metadata.csv
+電影色彩/導演名/評論數/電影長度/導演案讚數/演員案讚數/收入/電影類別/演員名
+電影名/投票數....
+ratings
+使用者/電影id/評分/時間戳記
+credits
+演員/員工/電影id
+link
+電影id/imdb/tmdb
+keywords
+tmdb電影/關鍵詞列表
+
