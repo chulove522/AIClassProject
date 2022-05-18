@@ -34,7 +34,8 @@ tmdb.debug = True
 
 #用於讀取資料，在協同過濾和SVD會用到
 def load_data():
-    ratings = pd.read_csv('ratings_renew.csv')
+    ratings = pd.read_csv('./csvdatas/ratings_renew.csv')
+    print(ratings)
     ratings = ratings.loc[:,['userId', 'title', 'rating', 'movieId']]
     user_ratings_table = ratings.pivot(index = 'userId', columns = 'movieId', values= 'rating')
 # Get the average rating for each user 
@@ -48,8 +49,8 @@ def load_data():
 
     movie_ratings = user_ratings_table_normed.T
     return user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
-    
-   
+
+load_data()
 #更新"電影-協同過濾"的資料，ratings_renew資料有變動才需更新
 #耗時 2min   
 def update_movie_similarity():
@@ -58,7 +59,7 @@ def update_movie_similarity():
     similarities_m = cosine_similarity(movie_ratings)
     # Wrap the similarities in a DataFrame
     movie_similarity = pd.DataFrame(similarities_m, index = movie_ratings.index, columns = movie_ratings.index)
-    movie_similarity.to_csv("movie_similarity.csv")
+    movie_similarity.to_csv("./csvdatas/movie_similarity.csv")
     
 
 #更新"使用者-協同過濾"的資料，ratings_renew資料有變動才需更新
@@ -69,7 +70,7 @@ def update_user_similarity():
     similarities_u = cosine_similarity(user_ratings_table_normed)
     # Wrap the similarities in a DataFrame
     user_similarity = pd.DataFrame(similarities_u, index = user_ratings_table.index, columns = user_ratings_table.index)
-    user_similarity.to_csv("user_similarity.csv")
+    user_similarity.to_csv("./csvdatas/user_similarity.csv")
     
 
 
@@ -106,7 +107,7 @@ def movie_rcmd_TMDB(id):
 #使用類別去推薦電影，可用於"相似的電影"
 #input movie id  >> movie #搜尋耗時約5sec
 def rcmd_by_genres(movie_id):
-    genres = pd.read_csv('genres.csv',index_col=0)
+    genres = pd.read_csv('./csvdatas/genres.csv',index_col=0)
     movie = Movie()
     
 # targetmovie = 'war of the buttons'
@@ -140,7 +141,7 @@ def rcmd_by_genres(movie_id):
 #輸入電影id，使用overview去推薦五則電影  #12s
 #user_id為選擇性，不輸則為電影推薦，輸入則為個人化推薦
 def rcmd_by_ov(movie_id = 'Waiting to Exhale', user = 1):
-    meta = pd.read_csv('meta_cleaned_n.csv')
+    meta = pd.read_csv('./csvdatas/meta_cleaned_n.csv')
     meta = meta.loc[:,['id', 'title', 'overview']]
     movie = Movie()
     result = pd.DataFrame()

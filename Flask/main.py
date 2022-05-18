@@ -133,17 +133,17 @@ def loginok():
         session["useremail"] = result["useremail"]
         session["username"] = result["username"]
         session["password"] = result["password"]
-        # r="/personal"
+        # r="/indexuser"
         # ?username="+username
-        return redirect("/personal")
+        return redirect("/indexuser")
     else:
         print("登入失敗")
         return render_template("error.html", errormsg=errordict[0])  # 沒帳號
 # 個人頁
 
 
-@app.route("/personal")
-def personal():
+@app.route("/indexuser")
+def indexuser():
     #usermessage_ ="歡迎~"
     global __islogin__
     print("登入狀態:", __islogin__)
@@ -152,7 +152,7 @@ def personal():
         username_ = session["username"]
         useremail_ = session["useremail"]
         password_ = session["password"]
-        return render_template("personal_new.html", name=nickname_, username=username_, email=useremail_, password=password_)
+        return render_template("indexuser.html", name=nickname_, username=username_, email=useremail_, password=password_)
     else:
         # 非法請求，直接導回首頁
         print("登入狀態:", __islogin__)
