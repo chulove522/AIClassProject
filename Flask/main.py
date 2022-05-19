@@ -150,7 +150,7 @@ def loginok():
         return render_template("error.html", errormsg=errordict[0])  # 沒帳號
 # 個人頁
 
-
+@app.route("/profile")
 @app.route("/indexuser")
 def indexuser():
     #usermessage_ ="歡迎~"
