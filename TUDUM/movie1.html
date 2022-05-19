@@ -230,10 +230,10 @@
                     <h1 class="h3 ml-4 mt-5 mb-4 text-gray-800">專屬於你的推薦</h1>
                     </div>
             
-                    <div class="ml-4 movie-content">
+                    <div class="ml-4 movie-content scroll-wrap">
                     {% for poster, details in movie_cards.items() if not movie_cards.hidden %}
-                        <div class="card" style="width: 14rem;" title="{{details[1]}}" onclick="recommendcard(this)">
-                        <div class="imghvr">
+                        <div class="card card-group" style="width: 14rem;" title="{{details[1]}}" onclick="recommendcard(this)">
+                        <div class="imghvr card scroll-card">
                             <img class="card-img-top" height="360" width="240" alt="{{details[0]}} - poster" src={{poster}}>
                             <div class="card-img-overlay" >
                             <span class="card-text" style="font-size:15px;background: #000000b8;color:white;padding:2px 5px;border-radius: 10px;"><span class="fa fa-star checked">&nbsp; {{details[2]}}/10</span></span>
@@ -264,7 +264,7 @@
                             <div class="scroll-wrap">
                                 <div class="card-group">
                                     <div class="card scroll-card">
-                                        <img src="https://picsum.photos/400/300?random=1" alt="">
+                                        <img src="{{poster}}" alt="">
                                         <a href="movie1.html" class="stretched-link"></a>
                                         <h3>{{title}}</h3>
                         
@@ -273,7 +273,7 @@
                                 </div>
                                 <div class="card-group">
                                     <div class=" card scroll-card">
-                                        <img src="https://picsum.photos/400/300?random=2" alt="">
+                                        <img src="{{poster}}" alt="">
                                         <a href="#" class="stretched-link"></a>
                                         <h3>{{title}}</h3>
                                         <p>{{release_date}}</p>
@@ -281,7 +281,7 @@
                                 </div>
                                 <div class="card-group">
                                     <div class="card scroll-card">
-                                        <img src="https://picsum.photos/400/300?random=3" alt="">
+                                        <img src="{{poster}}" alt="">
                                         <a href="#" class="stretched-link"></a>
                                         <h3>{{title}}</h3>
                                         <p>{{release_date}}</p>
@@ -289,7 +289,7 @@
                                 </div>
                                 <div class="card-group">
                                     <div class="card scroll-card">
-                                        <img src="https://picsum.photos/400/300?random=4" alt="">
+                                        <img src="{{poster}}" alt="">
                                         <a href="#" class="stretched-link"></a>
                                         <h3>{{title}}</h3>
                                         <p>{{release_date}}</p>
@@ -297,7 +297,7 @@
                                 </div>
                                 <div class="card-group">
                                     <div class="card scroll-card">
-                                        <img src="https://picsum.photos/400/300?random=5" alt="">
+                                        <img src="{{poster}}" alt="">
                                         <a href="#" class="stretched-link"></a>
                                         <h3>{{title}}</h3>
                                         <p>{{release_date}}</p>
@@ -305,7 +305,7 @@
                                 </div>
                                 <div class="card-group">
                                     <div class="card scroll-card">
-                                        <img src="https://picsum.photos/400/300?random=6" alt="">
+                                        <img src="{{poster}}" alt="">
                                         <a href="#" class="stretched-link"></a>
                                         <h3>{{title}}</h3>
                                         <p>{{release_date}}</p>
@@ -313,7 +313,7 @@
                                 </div>
                                 <div class="card-group">
                                     <div class="card scroll-card">
-                                        <img src="https://picsum.photos/400/300?random=7" alt="">
+                                        <img src="{{poster}}" alt="">
                                         <a href="#" class="stretched-link"></a>
                                         <h3>{{title}}</h3>
                                         <p>{{release_date}}</p>
@@ -321,10 +321,10 @@
                                 </div>
                                 <div class="card-group">
                                     <div class="card scroll-card">
-                                        <img src="https://picsum.photos/400/300?random=8" alt="">
+                                        <img src="/Flask/homepage/img/AIClass.png" alt="">
                                         <a href="#" class="stretched-link"></a>
-                                        <h3>{{title}}</h3>
-                                        <p>{{release_date}}</p>
+                                        <h3>Issac</h3>
+                                        <p>2022</p>
                                     </div>
                                 </div>
                             </div>

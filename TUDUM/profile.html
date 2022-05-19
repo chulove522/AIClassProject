@@ -308,15 +308,21 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-                <a class="nav-link" href="profile.html" role="button">
-                    <div>
-                        <img class="img-profile rounded-circle"
-                        src="img/undraw_profile.svg">
-                    </div>
-                    <h6 id="name" class="d-none d-lg-inline text-gray-100">{{username}}</h6>
-                </a>
-            </li>
+            <form action="" method="POST">
+                <input type="file" name="myfile" accept="image/*" />
+            </form>
+
+            <form action="/profile">
+                <li class="nav-item">
+                    <!-- <a class="nav-link" href="#" role="button"> -->
+                        <div>
+                            <img class="img-profile rounded-circle" 
+                            src="img/undraw_profile.svg">
+                        </div>
+                        <h6 id="name" class="d-none d-lg-inline text-gray-100">{{username}}</h6>
+                    <!-- </a> -->
+                </li>
+            </form>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
