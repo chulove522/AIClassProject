@@ -135,4 +135,4 @@ def recommend():
         vote_count=vote_count,release_date=release_date,movie_rel_date=movie_rel_date,curr_date=curr_date,runtime=runtime,status=status,genres=genres,movie_cards=movie_cards,reviews=movie_reviews,casts=casts,cast_details=cast_details)
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=3500) #啟動server
+    app.run(debug=True, host="0.0.0.0", port=3000) #啟動server

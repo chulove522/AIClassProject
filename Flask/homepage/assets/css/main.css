@@ -15,7 +15,7 @@ small, strike, strong, sub, sup, tt, var, b,
 u, i, center, dl, dt, dd, ol, ul, li, fieldset,
 form, label, legend, table, caption, tbody,
 tfoot, thead, tr, th, td, article, aside,
-canvas, details, embed, figure, figcaption,
+canvas, embed, figure, figcaption,
 footer, header, hgroup, menu, nav, output, ruby,
 section, summary, time, mark, audio, video {
 	margin: 0;
@@ -1090,7 +1090,7 @@ input::-moz-focus-inner {
 		-webkit-transform: scale(1.0);
 		-ms-transform: scale(1.0);
 		transform: scale(1.0);
-		-webkit-backface-visibility: hidden;
+
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -1300,7 +1300,7 @@ input::-moz-focus-inner {
 				transition-delay: 0.25s;
 				padding: 3rem 2rem;
 				max-height: 40rem;
-				overflow: hidden;
+				
 			}
 
 				#header .content .inner > :last-child {
@@ -1547,7 +1547,7 @@ input::-moz-focus-inner {
 				height: 4rem;
 				cursor: pointer;
 				text-indent: 4rem;
-				overflow: hidden;
+				
 				white-space: nowrap;
 			}
 

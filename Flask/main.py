@@ -9,7 +9,7 @@ from flask import render_template
 from matplotlib.pyplot import text
 import mongomember as mon
 import json
-#import model
+import model
 import urllib.request
 from datetime import date, datetime
 import numpy as np
@@ -387,7 +387,7 @@ def recommend():
     movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))}     
 
     # passing all the data to the html file
-    return render_template('recommend copy.html',title=title,poster=poster,overview=overview,
+    return render_template('recommend.html',title=title,poster=poster,overview=overview,
         vote_average=vote_average, #平均分
         vote_count=vote_count, #投票人數
         release_date=release_date,

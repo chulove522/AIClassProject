@@ -1,3 +1,4 @@
+console.log("載入搜尋js")
 $(function() {
   // Button will be disabled until we type something inside the input field
   const source = document.getElementById('autoComplete');
@@ -36,6 +37,7 @@ $(function() {
     }
   });
 });
+//搜尋有結果 
 
 // will be invoked when clicking on the recommended movie cards
 function recommendcard(e){

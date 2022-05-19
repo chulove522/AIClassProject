@@ -32,9 +32,8 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css"
         />
-
-        <!-- External CSS <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">-->
-
+        <!-- External CSS-->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
         <!--雖然看起來有錯但他不能拿掉!!---搜尋用!!-->
         <!---還有這種用法document.getElementById('username').innerHTML = user.firstname + " " +
             user.lastname;----->
@@ -91,6 +90,7 @@
                             ><br /><br />
                         </div>
 
+                        <!--搜尋的--->
                         <div id="loader" class="text-center"></div>
 
                         <!--
@@ -203,7 +203,7 @@
 
             <!-- Footer -->
             <footer id="footer">
-                <p><a href="/homepage/README.txt">這是README</a></p>
+                <p><a href="/README.txt">這是README</a></p>
             </footer>
         </div>
 

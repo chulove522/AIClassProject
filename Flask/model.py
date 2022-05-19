@@ -61,24 +61,24 @@ print("初始化~~~只需一次load data")
 
 #更新"電影-協同過濾"的資料，ratings_renew資料有變動才需更新
 #耗時 2min   
-def update_movie_similarity():
-    global user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
-    # Generate the similarity matrix
-    similarities_m = cosine_similarity(movie_ratings)
-    # Wrap the similarities in a DataFrame
-    movie_similarity = pd.DataFrame(similarities_m, index = movie_ratings.index, columns = movie_ratings.index)
-    movie_similarity.to_csv("./Flask/csvdatas/movie_similarity.csv")
+# def update_movie_similarity():
+#     global user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
+#     # Generate the similarity matrix
+#     similarities_m = cosine_similarity(movie_ratings)
+#     # Wrap the similarities in a DataFrame
+#     movie_similarity = pd.DataFrame(similarities_m, index = movie_ratings.index, columns = movie_ratings.index)
+#     movie_similarity.to_csv("./Flask/csvdatas/movie_similarity.csv")
     
 
 #更新"使用者-協同過濾"的資料，ratings_renew資料有變動才需更新
 #耗時 5min
-def update_user_similarity():
-    global user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
-    # Generate the similarity matrix
-    similarities_u = cosine_similarity(user_ratings_table_normed)
-    # Wrap the similarities in a DataFrame
-    user_similarity = pd.DataFrame(similarities_u, index = user_ratings_table.index, columns = user_ratings_table.index)
-    user_similarity.to_csv("./Flask/csvdatas/user_similarity.csv")
+# def update_user_similarity():
+#     global user_ratings_table, avg_ratings, user_ratings_table_normed, movie_ratings
+#     # Generate the similarity matrix
+#     similarities_u = cosine_similarity(user_ratings_table_normed)
+#     # Wrap the similarities in a DataFrame
+#     user_similarity = pd.DataFrame(similarities_u, index = user_ratings_table.index, columns = user_ratings_table.index)
+#     user_similarity.to_csv("./Flask/csvdatas/user_similarity.csv")
     
 
 
