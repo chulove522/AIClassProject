@@ -1,86 +1,99 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <!--
 	Dimension by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<title>hello, {{ name }}</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <head>
+        <title>Hello, {{ nickname }}</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-		<!-- Google Fonts -->
-		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-	  
-		<!-- Font Awesome -->
-		  
-		<!-- Bootstrap -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	  
-		<!-- jQuery -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	  
-		<!-- Auto Complete -->
-		<link rel="stylesheet"
-		  href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
-	  
-		<!-- External CSS <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">-->
-		
-	  
-		<!--雖然看起來有錯但他不能拿掉!!---搜尋用!!-->
-		<!---還有這種用法document.getElementById('username').innerHTML = user.firstname + " " +
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
+
+        <!-- Font Awesome -->
+
+        <!-- Bootstrap -->
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Auto Complete -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css"
+        />
+
+        <!-- External CSS <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">-->
+
+        <!--雖然看起來有錯但他不能拿掉!!---搜尋用!!-->
+        <!---還有這種用法document.getElementById('username').innerHTML = user.firstname + " " +
             user.lastname;----->
-		<!---//var films = JSON.parse('{{ suggestions | tojson | safe}}');
+        <!---//var films = JSON.parse('{{ suggestions | tojson | safe}}');
 			//var films = {{suggestions|tojson|safe}};--->
-			<script type="text/javascript">
-				var films = {{ suggestions| tojson}};
-				$(document).ready(function () {
-				  $("#myModal").modal('show');
-				});
-			  </script>
+        <script type="text/javascript">
+            var films = {{ suggestions| tojson}};
+            $(document).ready(function () {
+              $("#myModal").modal('show');
+            });
+        </script>
 
-		<link rel="stylesheet" href="/assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
-	</head>
+        <link rel="stylesheet" href="/assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+    </head>
 
-
-	<body class="is-preload">
-
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="icon fa-gem"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>推薦系統</h1>
-								<!---就是這 ^^ ---->
-								<!---
+    <body class="is-preload">
+        <!-- Wrapper -->
+        <div id="wrapper">
+            <!-- Header -->
+            <header id="header">
+                <div class="logo">
+                    <span class="icon fa-gem"></span>
+                </div>
+                <div class="content">
+                    <div class="inner">
+                        <h1>推薦系統</h1>
+                        <!---就是這 ^^ ---->
+                        <!---
 									<form action="/search">
 									搜尋:<input type="text" name="searchinfo">
 									<button>點擊送出</button>
 								</form>
 
 								--->
-								
-								<div class="form-group shadow-textarea" style="margin-top: 30px;text-align: center;color: white;">
-									<input type="text" name="movie" class="movie form-control" id="autoComplete" autocomplete="off" placeholder="Enter the Movie Name" required="required" />
-									<br>
-								</div>
-								<div class="form-group" style="text-align: center;">
-									<button class="btn btn-primary btn-block movie-button" disabled="true" >Enter</button><br><br>
-								  </div>
 
-								  <div id="loader" class="text-center">
-								</div>
-								
-								<!--
+                        <div
+                            class="form-group shadow-textarea"
+                            style="margin-top: 30px; text-align: center; color: white"
+                        >
+                            <input
+                                type="text"
+                                name="movie"
+                                class="movie form-control"
+                                id="autoComplete"
+                                autocomplete="off"
+                                placeholder="Enter the Movie Name"
+                                required="required"
+                            />
+                            <br />
+                        </div>
+                        <div class="form-group" style="text-align: center">
+                            <button class="btn btn-primary btn-block movie-button" disabled="true">Enter</button
+                            ><br /><br />
+                        </div>
+
+                        <div id="loader" class="text-center"></div>
+
+                        <!--
 								<div class="fail">
 								  <center>
 									<h3>Sorry! The movie you requested is not in our database.
@@ -89,118 +102,135 @@
 										請檢查拼寫或嘗試其他電影！</h3>
 									</center>
 								  </div>	--->
-								
-								
-							
-								<div class="results">
-								  <center>
-									<h2 id="name" class="text-uppercase"></h2>
-								  </center>
-								</div>
 
-								
+                        <div class="results">
+                            <center>
+                                <h2 id="name" class="text-uppercase"></h2>
+                            </center>
+                        </div>
 
-								<!------->
-								
-								<p><a href="/register">會員註冊</a></p>
-								<p><a href="/login">會員登入</a></p>
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#intro">Intro</a></li>
-								<li><a href="#work">Work</a></li>
-								<li><a href="#about">About</a></li>
-								<li><a href="#contact">Contact</a></li>
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+                        <!------->
 
-				<!-- Main -->
-					<div id="main">
+                        <p><a href="/register">會員註冊</a></p>
+                        <p><a href="/login">會員登入</a></p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#intro">Intro</a></li>
+                        <li><a href="#work">Work</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <!--<li><a href="#elements">Elements</a></li>-->
+                    </ul>
+                </nav>
+            </header>
 
-						<!-- Intro -->
-							<article id="intro">
-								<h2 class="major">Intro</h2>
-								<span class="image main"><img src="/images/pic01.jpg" alt="" /></span>
-								<p>俗話說的好，掌握思考過程，也就掌握了AI組員。
-									<br	>透過逆向歸納，得以用最佳的策略去分析AI組員。</p>
-								<p>問題的核心究竟是什麼？從這個角度來看，赫拉克利特曾經認為，公正，一定會打倒那些說假話和假作證的人。但願各位能從這段話中獲得心靈上的滋長。</p>
-							</article>
+            <!-- Main -->
+            <div id="main">
+                <!-- Intro -->
+                <article id="intro">
+                    <h2 class="major">Intro</h2>
+                    <span class="image main"><img src="/images/pic01.jpg" alt="" /></span>
+                    <p>
+                        俗話說的好，掌握思考過程，也就掌握了AI組員。 <br />透過逆向歸納，得以用最佳的策略去分析AI組員。
+                    </p>
+                    <p>
+                        問題的核心究竟是什麼？從這個角度來看，赫拉克利特曾經認為，公正，一定會打倒那些說假話和假作證的人。但願各位能從這段話中獲得心靈上的滋長。
+                    </p>
+                </article>
 
-						<!-- Work -->
-							<article id="work">
-								<h2 class="major">Work</h2>
-								<span class="image main"><img src="/images/pic02.jpg" alt="" /></span>
-								<p>我想，把AI專題的意義想清楚，對各位來說並不是一件壞事。雨果說過一句著名的話，在任何科學上的雛形，都有它雙重的形象：胚胎時的醜惡，萌芽時的美麗。這影響了我的價值觀。拉伯雷說過一句富有哲理的話，肚了是最準確的時鐘。他會這麼說是有理由的。</p>
-								<p>雨果曾講過，世上只有兩種力量，一種是劍，一。這段話令我陷入了沈思。AI專題的發生，到底需要如何實現，不AI專題的發生，又會如何產生。蕭伯納講過，不知道怎樣生活的人，應當把死當成好事。這啟發了我。</p>
-							</article>
+                <!-- Work -->
+                <article id="work">
+                    <h2 class="major">Work</h2>
+                    <span class="image main"><img src="/images/pic02.jpg" alt="" /></span>
+                    <p>
+                        我想，把AI專題的意義想清楚，對各位來說並不是一件壞事。雨果說過一句著名的話，在任何科學上的雛形，都有它雙重的形象：胚胎時的醜惡，萌芽時的美麗。這影響了我的價值觀。拉伯雷說過一句富有哲理的話，肚了是最準確的時鐘。他會這麼說是有理由的。
+                    </p>
+                    <p>
+                        雨果曾講過，世上只有兩種力量，一種是劍，一。這段話令我陷入了沈思。AI專題的發生，到底需要如何實現，不AI專題的發生，又會如何產生。蕭伯納講過，不知道怎樣生活的人，應當把死當成好事。這啟發了我。
+                    </p>
+                </article>
 
-						<!-- About -->
-							<article id="about">
-								<h2 class="major">About</h2>
-								<span class="image main"><img src="/images/pic03.jpg" alt="" /></span>
-								<p>回過神才發現，思考推薦系統的存在意義，已讓我廢寢忘食。就我個人來說，推薦系統對我的意義，不能不說非常重大。做好推薦系統這件事，可以說已經成為了全民運動。</p>
-							</article>
+                <!-- About -->
+                <article id="about">
+                    <h2 class="major">About</h2>
+                    <span class="image main"><img src="/images/pic03.jpg" alt="" /></span>
+                    <p>
+                        回過神才發現，思考推薦系統的存在意義，已讓我廢寢忘食。就我個人來說，推薦系統對我的意義，不能不說非常重大。做好推薦系統這件事，可以說已經成為了全民運動。
+                    </p>
+                </article>
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<form action="/contact" method="POST">
-									<div class="fields">
-										<div class="field half">
-											<label for="nickname">Name</label>
-											<input type="text" name="nickname" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-										<button><input type="submit" value="Send Message"/></button>
-										<button><input type="reset" value="Reset" /></button>
-								</form>
-								<ul class="icons">
-									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</article>
+                <!-- Contact -->
+                <article id="contact">
+                    <h2 class="major">Contact</h2>
+                    <form action="/contact" method="POST">
+                        <div class="fields">
+                            <div class="field half">
+                                <label for="nickname">Name</label>
+                                <input type="text" name="nickname" id="name" />
+                            </div>
+                            <div class="field half">
+                                <label for="email">Email</label>
+                                <input type="text" name="email" id="email" />
+                            </div>
+                            <div class="field">
+                                <label for="message">Message</label>
+                                <textarea name="message" id="message" rows="4"></textarea>
+                            </div>
+                        </div>
+                        <button><input type="submit" value="Send Message" /></button>
+                        <button><input type="reset" value="Reset" /></button>
+                    </form>
+                    <ul class="icons">
+                        <li>
+                            <a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                        </li>
+                        <li>
+                            <a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a>
+                        </li>
+                    </ul>
+                </article>
 
-						<!-- Elements -->
-							
-					</div>
+                <!-- Elements -->
+            </div>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<p><a href="/homepage/README.txt">這是README</a></p>	
-					</footer>
+            <!-- Footer -->
+            <footer id="footer">
+                <p><a href="/homepage/README.txt">這是README</a></p>
+            </footer>
+        </div>
 
-			</div>
+        <!-- BG -->
+        <div id="bg"></div>
 
-		<!-- BG -->
-			<div id="bg"></div>
+        <!-- Scripts -->
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="/assets/js/browser.min.js"></script>
+        <script src="/assets/js/breakpoints.min.js"></script>
+        <script src="/assets/js/util.js"></script>
+        <script src="/assets/js/main.js"></script>
 
-		<!-- Scripts -->
-			<script src="/assets/js/jquery.min.js"></script>
-			<script src="/assets/js/browser.min.js"></script>
-			<script src="/assets/js/breakpoints.min.js"></script>
-			<script src="/assets/js/util.js"></script>
-			<script src="/assets/js/main.js"></script>
+        <!--- 印度人用到 -<script type="text/javascript" src="{{url_for('static', filename='autoComplete.min.js')}}"></script>--->
+        <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='autocomplete.js')}}"></script>
 
-		<!--- 印度人用到 -<script type="text/javascript" src="{{url_for('static', filename='autoComplete.min.js')}}"></script>--->
-		<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
-  <script type="text/javascript" src="{{url_for('static', filename='autocomplete.js')}}"></script>
-
-  <script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-	</body>
+        <script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>
