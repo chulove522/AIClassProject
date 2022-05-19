@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>b</title>
+        <style>
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>My Profile</h1>
+
+        <form action="後端做一個修改資料用的API" method="POST">
+            <label for="username">user:</label>
+            <input type="text" name="username" id="username" />
+
+            <label for="useremail">email:</label>
+            <input type="email" name="useremail" id="useremail" />
+
+            <label for="password">password:</label>
+            <input type="password" name="password" id="password" />
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <script>
+            // 從網址取得 USER ID
+            var url_string = window.location.search;
+            console.log('url_string', url_string);
+            const urlParams = new URLSearchParams(url_string);
+
+            const userID = urlParams.get('userID');
+            console.log(userID);
+
+            // 取得 USER ID 之後，再去後端 API 取得使用者資訊
+            fetch('./userData.json')
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    document.querySelector('#username').value = data.username;
+                    document.querySelector('#useremail').value = data.email;
+                    document.querySelector('#password').value = data.password;
+                });
+        </script>
+    </body>
+</html>
