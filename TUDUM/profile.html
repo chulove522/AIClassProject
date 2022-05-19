@@ -11,11 +11,11 @@
 
     <title>您好!</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
 
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="./assets/css/fontawesome-all.min.css " rel="stylesheet" type="text/css">
+    <link href="./assets/css/sb-admin-2.min.css" rel="stylesheet">
     
 
 </head>
@@ -141,16 +141,112 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">My Profile</h1>
+                  
+                    <section>
+                        <form action="/updateperson" method="POST">
+                            <div class="fieldset col-md-6">
+                                <div class="">
+                                    <div class="col mb-3">
+                                        <label for="username">帳號</label>
+                                        <input class="form-control col-lg-6" type="text" name="username" id="username" value="" placeholder="{{username}}" />
+                                    </div>
+                                    <div class="col mb-3">
+                                        <label for="password">密碼</label>
+                                        <input class="form-control col-lg-6" type="password" id="password"name="password" value="" placeholder="••••••••" />
+                                    </div>
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="nickname">暱稱</label>
+                                    <input class="form-control col-lg-6" type="text" id="nickname" name="nickname" value="" placeholder="{{nickname}}" />
+                                </div>
+                                <div class="col mb-3">
+                                    <label for="email">信箱</label>
+                                    <input class="form-control col-lg-6" type="email" id="email" name="email" value="" placeholder="{{email}}" />
+                                </div>
+                            </div>	
+                            <br>
 
-                    
-                    這是 {{name}} 的個人頁面
-                    <br />
-                    您的帳號是 {{username}}
-                    <br />
-                    您的信箱是 {{email}}
-                    <br />
-                    您說了 {{msg}}
-            
+                            <div><h5>喜好類型</h5></div>
+                            <div class="fieldset col-md-6">
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="ad" name="category" value="10">
+                                    <label class=form-check-label for="ad">冒險</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="my" name="category" value="11">
+                                    <label class=form-check-label for="my">神秘</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="ac" name="category" value="15">
+                                    <label class=form-check-label for="ac">動作</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="horo" name="category" value="12">
+                                    <label class=form-check-label for="horo">科幻片</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="fan" name="category" value="9">
+                                    <label class=form-check-label for="fan">奇幻</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="cr" name="category" value="18">
+                                    <label class=form-check-label for="cr">犯罪</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="anime" name="category" value="6">
+                                    <label class=form-check-label for="anime">動畫片</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="ko" name="category" value="7">
+                                    <label class=form-check-label for="ko">恐怖片</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="re" name="category" value="1">
+                                    <label class=form-check-label for="re">紀錄片</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="com" name="category" value="2">
+                                    <label class=form-check-label for="com">喜劇</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="tv" name="category" value="3">
+                                    <label class=form-check-label for="tv">TV節目</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="mv" name="category" value="4">
+                                    <label class=form-check-label for="mv">大眾電影</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="mu" name="category" value="5">
+                                    <label class=form-check-label for="mu">音樂劇</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="hi" name="category" value="8">
+                                    <label class=form-check-label for="hi">歷史</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="checkbox" id="ro" name="category" value="20">
+                                    <label class=form-check-label for="ro">浪漫</label>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div><h5>您的性別</h5></div>
+                            <div class="fieldset">	
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="radio" id="male" name="gender" value="male" checked>
+                                    <label class=form-check-label for="male">男</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class=form-check-input type="radio" id="female" name="gender" value="female">
+                                    <label class=form-check-label for="female">女</label>
+                                </div>
+                                
+                            </div>
+                            
+                        </form>
+                    </section>
+
                     <form action="/updateperson">
                         <button>點我更改個人資料(這個功能還沒做好~)</button>
                     </form>
@@ -266,16 +362,16 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
+     <!-- Bootstrap core JavaScript-->
+     <script src="./assets/js/jquery.min.js"></script>
+     <script src="./assets/js/bootstrap.bundle.min.js"></script>
+ 
+     <!-- Core plugin JavaScript-->
+     <script src="./assets/js/jquery.easing.min.js"></script>
+ 
+     <!-- Custom scripts for all pages-->
+     <script src="./assets/js/sb-admin-2.min.js"></script>
+ 
 </body>
 
 </html>
