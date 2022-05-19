@@ -196,16 +196,18 @@
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-3 mb-4">
                         <div class="movie-scroller rowContainer" id = movie-scroller>
                             <h1 class="h3 ml-4 mt-5 mb-4 text-gray-800">{{header}}</h1>
-                                <div class="container-fluid">
-                                    <div class="scroll-wrap">
-                                        <div class="card-group">
+                            <div class="container-fluid">
+                                <div class="scroll-wrap">
+                                    <div class="card-group">
+                                            <form action="/movie1">
+                                            <button>
                                             <div class="card scroll-card d-flex">
                                                 <img src="https://picsum.photos/400/300?random=1" alt="">
-                                                <a href="movie1.html" class="stretched-link zindex "></a>
                                                 <h5>Turning Red</h5>
-                                
                                                 <p>2022</p>
                                             </div>
+                                            </button>
+                                            </form> 
                                         </div>
                                         <div class="card-group">
                                             <div class=" card scroll-card">
@@ -272,6 +274,7 @@
                         </div>
 
                     </div>
+
                 <!-- /.container-fluid -->
 
             </div>
@@ -308,10 +311,11 @@
                     <div>
                         <img class="img-profile rounded-circle"
                         src="img/undraw_profile.svg">
+                        <h6 id="name" class="d-none d-lg-inline text-gray-100">{{username}}</h6>
                     </div>
-                    <h6 id="name" class="d-none d-lg-inline text-gray-100">{{username}}</h6>
                 </button>
             </form>       
+
             
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -322,28 +326,28 @@
                 <a class="nav-link" href="watched.html">
                     <div class="user-list">
                         <span>我看過的電影</span>
-                        <h4 id="movie">{{movie}}</h4>
+                        <h4 id="movie">73{{movie}}</h4>
                     </div>
                 </a>
                 
                 <a class="nav-link" href="comment.html">
                     <div class="user-list">
                         <span>我的評論</span>
-                        <h4 id="comment">{{comment}}</h4>
+                        <h4 id="comment">15{{comment}}</h4>
                     </div>
                 </a>
 
                 <a class="nav-link" href="list.html">
                     <div class="user-list">
                         <span>我的片單</span>
-                        <h4 id="list">{{list}}</h4>
+                        <h4 id="list">23{{list}}</h4>
                     </div>
                 </a>
 
                 <a class="nav-link" href="save.html">
                     <div class="user-list">
                         <span>待觀看</span>
-                        <h4 id="save">{{save}}</h4>
+                        <h4 id="save">11{{save}}</h4>
                     </div>
                 </a>
             </li>

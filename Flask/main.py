@@ -50,8 +50,8 @@ def index():
     if(__islogin__):
         nickname_ = session["nickname"]
         username_ = session["username"]
-        # return render_template("index copy.html", name=nickname_, user=username_ ,suggestions=suggestions)
-    return render_template("index taotao.html", name="初次見面", suggestions=suggestions)
+        # return render_template("index copy.html", nickname=nickname_, user=username_ ,suggestions=suggestions)
+    return render_template("index taotao.html", nickname="初次見面", suggestions=suggestions)
 
     # lang = request.headers.get("accept-language") #瀏覽器的偏好語言
     # if(lang.startswith("zh-TW")):
@@ -161,7 +161,7 @@ def indexuser():
         username_ = session["username"]
         useremail_ = session["useremail"]
         password_ = session["password"]
-        return render_template("indexuser.html", name=nickname_, username=username_, email=useremail_, password=password_)
+        return render_template("indexuser.html", nickname=nickname_, username=username_, email=useremail_, password=password_)
     else:
         # 非法請求，直接導回首頁
         print("登入狀態:", __islogin__)
@@ -177,12 +177,27 @@ def profile():
         username_ = session["username"]
         useremail_ = session["useremail"]
         password_ = session["password"]
-        return render_template("profile.html", name=nickname_, username=username_, email=useremail_, password=password_)
+        return render_template("profile.html", nickname=nickname_, username=username_, email=useremail_, password=password_)
     else:
         # 非法請求，直接導回首頁
         print("登入狀態:", __islogin__)
         return redirect("/")
 
+@app.route("/movie1")
+def movie1():
+    #usermessage_ ="歡迎~"
+    global __islogin__
+    print("登入狀態:", __islogin__)
+    if __islogin__ == True:
+        nickname_ = session["nickname"]
+        username_ = session["username"]
+        useremail_ = session["useremail"]
+        password_ = session["password"]
+        return render_template("movie1.html", nickname=nickname_, username=username_, email=useremail_, password=password_)
+    else:
+        # 非法請求，直接導回首頁
+        print("登入狀態:", __islogin__)
+        return redirect("/")
 
 # 錯誤頁面
 errordict = {0: "沒這個帳號", 1: "密碼錯了", 2: "未知錯誤發生",
