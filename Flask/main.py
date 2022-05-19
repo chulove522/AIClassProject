@@ -45,11 +45,13 @@ def index():
     # print("瀏覽器與os",request.headers.get("user-agent"))
     # print("語言偏好",request.headers.get("accept-language"))
     # print("引薦網址",request.headers.get("referrer")) #從哪連過來
+    suggestions = get_suggestions()
+    suggestions=json.dumps(suggestions)
     if(__islogin__):
         nickname_ = session["nickname"]
         username_ = session["username"]
-        return render_template("index copy.html", name=nickname_, user=username_)
-    return render_template("index copy.html", name="初次見面")
+        return render_template("index copy.html", name=nickname_, user=username_ ,suggestions=suggestions)
+    return render_template("index taotao.html", name="初次見面", suggestions=suggestions)
 
     # lang = request.headers.get("accept-language") #瀏覽器的偏好語言
     # if(lang.startswith("zh-TW")):
@@ -258,9 +260,17 @@ filename = 'nlp_model.pkl'
 clf = pickle.load(open("./Flask/nlp_model.pkl", 'rb'))   #binary format for reading
 vectorizer = pickle.load(open('./Flask/tranform.pkl','rb'))
 
+# 載入首頁需要 auto complete
+def get_suggestions():
+    data = pd.read_csv('./The-Movie/main_data.csv')
+    return list(data['movie_title'].str.capitalize())
+
 # ----------------------跟js網頁溝通----------------------#
 @app.route("/recommend",methods=["POST"])
 def recommend():
+    # get movie suggestions for auto complete
+    suggestions = model.get_suggestions()
+
     # getting data from AJAX request
     title = request.form['title']
     cast_ids = request.form['cast_ids']
@@ -285,9 +295,6 @@ def recommend():
     rec_movies_org = request.form['rec_movies_org']
     rec_year = request.form['rec_year']
     rec_vote = request.form['rec_vote']
-
-    # get movie suggestions for auto complete
-    suggestions = get_suggestions()
 
     # call the convert_to_list function for every string that needs to be converted to list
     rec_movies_org = convert_to_list(rec_movies_org)
