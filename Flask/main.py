@@ -25,7 +25,7 @@ app = Flask(__name__,
             template_folder='templates',
             )
 # key設定
-#app.secret_key = "the key"
+app.secret_key = "the key"
 
 # 狀態設定
 __islogin__ = False
