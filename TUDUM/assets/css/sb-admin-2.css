@@ -11699,7 +11699,7 @@ a:focus {
   .sidebar .nav-item .nav-link {
     display: block;
     width: 100%;
-    text-align: left;
+    text-align: center;
     padding: 1rem;
     width: 14rem;
   }
