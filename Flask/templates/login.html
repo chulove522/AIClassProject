@@ -1,82 +1,108 @@
-<!DOCTYPE HTML>
-<!--
-	Dimension by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>登入頁面</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+        <title>TUDUM - Sign in - It's great to see you again</title>
 
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="icon fa-gem"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>推薦系統</h1>
-								<p><a href="/README.txt">這是README</a></p>
-							</div>
-						</div>
-						<div>
-							<section>
-								<h3 class="major">登入表單</h3>
-								<form action="/loginok" method="POST">
-									<div class="fields">
-										<div class="field half">
-											<label for="username">帳號</label>
-											<input type="text" name="username" value="" placeholder="請輸入英文或數字" />
-										</div>
-										<div class="field half">
-											<label for="password">密碼</label>
-											<input type="password" name="password" value="" placeholder="your password" />
-										</div>
-										<div class="field half">
-											<input type="checkbox" id="demo-human" name="human">
-											<label for="demo-human">我不是機器人</label>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-									</ul>
-								</form>
-							</section>
-				<!-- Main -->
-					<div id="main">
-						<!-- Elements -->
-						<h4>Team</h4>
-						<ul>
-							<li>Peach</li>
-							<li>Aaron</li>
-							<li>Meitsu</li>
-							<li>simo</li>
-							<li>better</li>
-						</ul>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet" />
 
-					</div>
-				</header>
-			</div>
-			</div>
+        <link href="./assets/css/fontawesome-all.min.css " rel="stylesheet" type="text/css" />
+        <link href="./assets/css/sb-admin-2.min.css" rel="stylesheet" />
+    </head>
 
-		<!-- BG -->
-			<div id="bg"></div>
+    <body class="bg-gradient-primary">
+        <div class="container">
+            <!-- Outer Row -->
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-12 col-md-9">
+                    <div class="card o-hidden border-0 shadow-lg my-5">
+                        <div class="card-body p-0">
+                            <!-- Nested Row within Card Body -->
+                            <div class="row">
+                                <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                                <div class="col-lg-6">
+                                    <div class="p-5">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        </div>
+                                        <form action="/loginok" method="POST" class="user">
+                                            <div class="form-group">
+                                                <input
+                                                    type="text"
+                                                    class="form-control form-control-user"
+                                                    name="username"
+                                                    value=""
+                                                    placeholder="your username"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <input
+                                                    type="password"
+                                                    class="form-control form-control-user"
+                                                    name="password"
+                                                    value=""
+                                                    placeholder="your password"
+                                                />
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox small">
+                                                    <input
+                                                        type="checkbox"
+                                                        class="custom-control-input"
+                                                        id="customCheck"
+                                                    />
+                                                    <label class="custom-control-label" for="customCheck"
+                                                        >Remember Me</label
+                                                    >
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-checkbox small">
+                                                        <input
+                                                            type="checkbox"
+                                                            class="custom-control-input"
+                                                            id="demo-human"
+                                                            name="human"
+                                                        />
+                                                        <label class="custom-control-label" for="demo-human"
+                                                            >我不是機器人</label
+                                                        >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <form action="/indexuser">
+                                                <button>Login</button>
+                                            </form>
+                                        </form>
+                                        <hr />
+                                        <div class="text-center">
+                                            <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        </div>
+                                        <div class="text-center">
+                                            <a class="small" href="register.html">Create an Account!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<!-- Scripts -->
-			<script src="/assets/js/jquery.min.js"></script>
-			<script src="/assets/js/browser.min.js"></script>
-			<script src="/assets/js/breakpoints.min.js"></script>
-			<script src="/assets/js/util.js"></script>
-			<script src="/assets/js/main.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="./assets/js/jquery.min.js"></script>
+        <script src="./assets/js/bootstrap.bundle.min.js"></script>
 
-	</body>
+        <!-- Core plugin JavaScript-->
+        <script src="./assets/js/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="./assets/js/sb-admin-2.min.js"></script>
+    </body>
 </html>
