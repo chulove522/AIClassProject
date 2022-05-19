@@ -150,7 +150,7 @@ def loginok():
         return render_template("error.html", errormsg=errordict[0])  # 沒帳號
 # 個人頁
 
-@app.route("/profile")
+
 @app.route("/indexuser")
 def indexuser():
     #usermessage_ ="歡迎~"
@@ -162,6 +162,22 @@ def indexuser():
         useremail_ = session["useremail"]
         password_ = session["password"]
         return render_template("indexuser.html", name=nickname_, username=username_, email=useremail_, password=password_)
+    else:
+        # 非法請求，直接導回首頁
+        print("登入狀態:", __islogin__)
+        return redirect("/")
+
+@app.route("/profile")
+def profile():
+    #usermessage_ ="歡迎~"
+    global __islogin__
+    print("登入狀態:", __islogin__)
+    if __islogin__ == True:
+        nickname_ = session["nickname"]
+        username_ = session["username"]
+        useremail_ = session["useremail"]
+        password_ = session["password"]
+        return render_template("profile.html", name=nickname_, username=username_, email=useremail_, password=password_)
     else:
         # 非法請求，直接導回首頁
         print("登入狀態:", __islogin__)
