@@ -50,7 +50,7 @@ def index():
     if(__islogin__):
         nickname_ = session["nickname"]
         username_ = session["username"]
-        return render_template("index copy.html", name=nickname_, user=username_ ,suggestions=suggestions)
+        # return render_template("index copy.html", name=nickname_, user=username_ ,suggestions=suggestions)
     return render_template("index taotao.html", name="初次見面", suggestions=suggestions)
 
     # lang = request.headers.get("accept-language") #瀏覽器的偏好語言

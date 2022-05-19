@@ -303,21 +303,22 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-                <a class="nav-link" href="profile.html" role="button">
+            <form action="/profile">
+                <button>
                     <div>
                         <img class="img-profile rounded-circle"
                         src="img/undraw_profile.svg">
                     </div>
                     <h6 id="name" class="d-none d-lg-inline text-gray-100">{{username}}</h6>
-                </a>
-            </li>
+                </button>
+            </form>       
             
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item justify-content-center">
+                <p><a href="/login">會員登入</a></p>
                 <a class="nav-link" href="watched.html">
                     <div class="user-list">
                         <span>我看過的電影</span>
