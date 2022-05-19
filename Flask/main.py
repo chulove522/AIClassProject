@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from operator import truediv
 from click import password_option
 from flask import Flask
@@ -8,7 +9,7 @@ from flask import render_template
 from matplotlib.pyplot import text
 import mongomember as mon
 import json
-import model
+#import model
 import urllib.request
 from datetime import date, datetime
 import numpy as np
@@ -24,7 +25,7 @@ app = Flask(__name__,
             template_folder='templates',
             )
 # key設定
-app.secret_key = "the key"
+#app.secret_key = "the key"
 
 # 狀態設定
 __islogin__ = False
@@ -45,8 +46,9 @@ def index():
     # print("瀏覽器與os",request.headers.get("user-agent"))
     # print("語言偏好",request.headers.get("accept-language"))
     # print("引薦網址",request.headers.get("referrer")) #從哪連過來
-    suggestions = get_suggestions()
-    suggestions=json.dumps(suggestions)
+    suggestions = get_suggestions()   #list型是
+    #sjson=json.dumps(suggestions)
+
     if(__islogin__):
         nickname_ = session["nickname"]
         username_ = session["username"]
@@ -300,7 +302,7 @@ def get_suggestions():
 @app.route("/recommend",methods=["POST"])
 def recommend():
     # get movie suggestions for auto complete
-    suggestions = model.get_suggestions()
+    suggestions = get_suggestions()
 
     # getting data from AJAX request
     title = request.form['title']
