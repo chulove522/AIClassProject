@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 #from asyncio.windows_events import NULL
-=======
->>>>>>> 88ebbd644f1e43d3a6a447d8aca1eb119003d587
 from operator import truediv
 from click import password_option
 from flask import Flask
