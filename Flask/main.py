@@ -289,23 +289,24 @@ def recommendByCatogory(movieid):
 
 # load the nlp model and tfidf vectorizer from disk
 # 載入自然語言模型檔案
-filename = 'nlp_model.pkl'
-clf = pickle.load(open("./Flask/nlp_model.pkl", 'rb'))   #binary format for reading
-vectorizer = pickle.load(open('./Flask/tranform.pkl','rb'))
+# filename = 'nlp_model.pkl'
+# clf = pickle.load(open("./Flask/nlp_model.pkl", 'rb'))   #binary format for reading
+# vectorizer = pickle.load(open('./Flask/tranform.pkl','rb'))
 
 #給指令派切換用之路徑
-# clf = pickle.load(open("./nlp_model.pkl", 'rb'))   #binary format for reading
-# vectorizer = pickle.load(open('./tranform.pkl','rb'))
+filename = 'nlp_model.pkl'
+clf = pickle.load(open("./nlp_model.pkl", 'rb'))   #binary format for reading
+vectorizer = pickle.load(open('./tranform.pkl','rb'))
 
 # 載入首頁需要 auto complete
-def get_suggestions():
-    data = pd.read_csv('./The-Movie/main_data.csv')
-    return list(data['movie_title'].str.capitalize())
+# def get_suggestions():
+#     data = pd.read_csv('./The-Movie/main_data.csv')
+#     return list(data['movie_title'].str.capitalize())
 
 # #給指令派切換用之路徑
-# def get_suggestions():
-#     data = pd.read_csv('../The-Movie/main_data.csv')
-#     return list(data['movie_title'].str.capitalize())
+def get_suggestions():
+    data = pd.read_csv('../The-Movie/main_data.csv')
+    return list(data['movie_title'].str.capitalize())
 
 # ----------------------跟js網頁溝通----------------------#
 @app.route("/recommend",methods=["POST"])
