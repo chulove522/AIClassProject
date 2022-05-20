@@ -1,4 +1,4 @@
-#from asyncio.windows_events import NULL
+from asyncio.windows_events import NULL
 from operator import truediv
 from click import password_option
 from flask import Flask
@@ -305,7 +305,7 @@ vectorizer = pickle.load(open('./tranform.pkl','rb'))
 
 # #給指令派切換用之路徑
 def get_suggestions():
-    data = pd.read_csv('../The-Movie/main_data.csv')
+    data = pd.read_csv('./main_data.csv')
     return list(data['movie_title'].str.capitalize())
 
 # ----------------------跟js網頁溝通----------------------#
