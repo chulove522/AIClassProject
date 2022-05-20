@@ -143,34 +143,6 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid" style="overflow-y: visible">
 
-                    <!-- carousel -->
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img src="..." class="d-block w-100" alt="...">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="..." class="d-block w-100" alt="...">
-                          </div>
-                          <div class="carousel-item">
-                            <img src="..." class="d-block w-100" alt="...">
-                          </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Next</span>
-                        </button>
-                      </div>
-
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mt-4 ml-1 mb-0 text-gray-800">今天想看部好電影嗎？</h1>
@@ -186,91 +158,82 @@
                           </blockquote>
                         </div>
                     </div>
-                    <!-- <div class="quote mb-4">
-                        <span class="my-3">遺憾有很多樣子：不敢愛的人，來不及說的話，和不夠努力的曾經。</span>
-                        <span class="mb-0"><a href="#" class="text-black fw-bold">《奇異博士2：失控多重宇宙, 2022》</a></span>
-                    </div> -->
-                    
 
                     <!-- Content Row -->
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-3 mb-4">
                         <div class="movie-scroller rowContainer" id = movie-scroller>
-                            <h1 class="h3 ml-4 mt-5 mb-4 text-gray-800">{{header}}</h1>
-                            <div class="container-fluid">
-                                <div class="scroll-wrap">
-                                    <div class="card-group">
-                                            <form action="/movie1">
-                                            <button>
-                                            <div class="card scroll-card d-flex">
-                                                <img src="https://picsum.photos/400/300?random=1" alt="">
-                                                <h5>Turning Red</h5>
+                            <h1 class="h3 ml-4 mt-5 mb-4 text-gray-800">專屬於你的推薦</h1>
+                                <div class="container-fluid">
+                                    <div class="scroll-wrap">
+                                        <div class="card-group">
+                                            <div class="card scroll-card">
+                                                <img src="https://www.themoviedb.org/t/p/w1280/vAIdAnOVnyiQtDcWy07n03GCoqT.jpg" alt="">
+                                                <a href="#" class="stretched-link"></a>
+                                                <h6>深水</h6>
+                                
                                                 <p>2022</p>
                                             </div>
-                                            </button>
-                                            </form> 
                                         </div>
                                         <div class="card-group">
                                             <div class=" card scroll-card">
-                                                <img src="https://picsum.photos/400/300?random=2" alt="">
+                                                <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/wkqmijunK0dyhSBzuBMSdGy8xLA.jpg" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h5>{{title}}</h5>
-                                                <p>{{year}}</p>
+                                                <h6>哈利波特：混血王子的背叛</h6>
+                                                <p>2009</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
-                                                <img src="https://picsum.photos/400/300?random=3" alt="">
+                                                <img src="https://www.themoviedb.org/t/p/w1280/qFmwhVUoUSXjkKRmca5yGDEXBIj.jpg" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h5>{{title}}</h5>
-                                                <p>{{year}}</p>
+                                                <h6>蜘蛛人3</h6>
+                                                <p>2007</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
-                                                <img src="https://picsum.photos/400/300?random=4" alt="">
+                                                <img src="https://www.themoviedb.org/t/p/w1280/74xTEgt7R36Fpooo50r9T25onhq.jpg" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h5>{{title}}</h5>
-                                                <p>{{year}}</p>
+                                                <h6>蝙蝠俠</h6>
+                                                <p>2022</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
-                                                <img src="https://picsum.photos/400/300?random=5" alt="">
+                                                <img src="https://www.themoviedb.org/t/p/w1280/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h5>{{title}}</h5>
-                                                <p>{{year}}</p>
+                                                <h6>歡迎來到布達佩斯大飯店</h6>
+                                                <p>2014</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
-                                                <img src="https://picsum.photos/400/300?random=6" alt="">
+                                                <img src="https://www.themoviedb.org/t/p/w1280/iO1bilpfOq49s7eJ7mIAZ1gsi7f.jpg" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h5>{{title}}</h5>
-                                                <p>{{year}}</p>
+                                                <h6>神鬼奇航3：世界的盡頭</h6>
+                                                <p>2007</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
-                                                <img src="https://picsum.photos/400/300?random=7" alt="">
+                                                <img src="https://www.themoviedb.org/t/p/original/aHwZZTEzJJJxYi8AP6vxNM6x5he.jpg" alt="">
                                                 <a href="#" class="stretched-link"></a>
-                                                <h5>{{title}}</h5>
-                                                <p>{{year}}</p>
+                                                <h6>冰原歷險記</h6>
+                                                <p>2002</p>
                                             </div>
                                         </div>
                                         <div class="card-group">
                                             <div class="card scroll-card">
-                                                <img src="https://picsum.photos/400/300?random=8" alt="">
-                                                <a href="#" class="stretched-link"></a>
-                                                <h5>{{title}}</h5>
-                                                <p>{{year}}</p>
+                                                <img src="/Flask/homepage/img/AIClass.png" alt="">
+                                                <a href="aiclass.html" class="stretched-link"></a>
+                                                <h6>Issac</h6>
+                                                <p>2022</p>
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
-                            
-                            </div>
+                        </div>
+        
                         </div>
 
                     </div>
