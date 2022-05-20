@@ -9,7 +9,7 @@ from flask import render_template
 from matplotlib.pyplot import text
 import mongomember as mon
 import json
-import model
+#import model
 import urllib.request
 from datetime import date, datetime
 import numpy as np
@@ -310,9 +310,6 @@ def get_suggestions():
 # ----------------------跟js網頁溝通----------------------#
 @app.route("/recommend",methods=["POST"])
 def recommend():
-    # get movie suggestions for auto complete
-    suggestions = get_suggestions()
-
     # getting data from AJAX request
     title = request.form['title']
     cast_ids = request.form['cast_ids']
@@ -337,6 +334,9 @@ def recommend():
     rec_movies_org = request.form['rec_movies_org']
     rec_year = request.form['rec_year']
     rec_vote = request.form['rec_vote']
+
+    # get movie suggestions for auto complete
+    suggestions = get_suggestions()
 
     # call the convert_to_list function for every string that needs to be converted to list
     rec_movies_org = convert_to_list(rec_movies_org)
@@ -393,8 +393,7 @@ def recommend():
         movie_rel_date = datetime.strptime(rel_date, '%Y-%m-%d')
 
     # combining reviews and comments into a dictionary
-    movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))}     
-
+    movie_reviews = {reviews_list[i]: reviews_status[i] for i in range(len(reviews_list))}   
     # passing all the data to the html file
     return render_template('recommend.html',title=title,poster=poster,overview=overview,
         vote_average=vote_average, #平均分

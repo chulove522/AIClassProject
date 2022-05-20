@@ -15,14 +15,14 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet" />
 
         <!-- Font Awesome -->
-
-        <!-- Bootstrap -->
-        <link
+        
+        <!-- Bootstrap <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
             crossorigin="anonymous"
-        />
+        />-->
+        
 
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -33,6 +33,7 @@
             href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css"
         />
         <!-- External CSS-->
+        <link rel="stylesheet" href="/assets/css/main.css" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
         <!--雖然看起來有錯但他不能拿掉!!---搜尋用!!-->
         <!---還有這種用法document.getElementById('username').innerHTML = user.firstname + " " +
@@ -46,7 +47,7 @@
             });
         </script>
 
-        <link rel="stylesheet" href="/assets/css/main.css" />
+
         <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
     </head>
 
@@ -72,7 +73,7 @@
 
                         <div
                             class="form-group shadow-textarea"
-                            style="margin-top: 30px; text-align: center; color: white"
+                            style="margin-top: 30px; text-align: center; color: white;" 
                         >
                             <input
                                 type="text"
@@ -86,29 +87,52 @@
                             <br />
                         </div>
                         <div class="form-group" style="text-align: center">
-                            <button class="btn btn-primary btn-block movie-button" disabled="true">Enter</button
+                            <button class="btn btn-block movie-button" style="width:300px;height:40px;" disabled="true">Enter</button
                             ><br /><br />
                         </div>
 
                         <!--搜尋的--->
                         <div id="loader" class="text-center"></div>
 
-                        <!--
-								<div class="fail">
-								  <center>
-									<h3>Sorry! The movie you requested is not in our database.
-									  Please check the spelling or try with other movies!</h3> 
-									  <h3>對不起！您所請求的電影不在我們的數據庫當中。<br>
-										請檢查拼寫或嘗試其他電影！</h3>
-									</center>
-								  </div>	--->
+                        <!---->
+                        <div class="fail">
+                            <center>
+                              <h3>Sorry! The movie you requested is not in our database.
+                                Please check the spelling or try with other movies!</h3> 
+                                <h3>對不起！您所請求的電影不在我們的數據庫當中。<br>
+                                  請檢查拼寫或嘗試其他電影！</h3>
+                              </center>
+                            </div>
+						
+                        
 
                         <div class="results">
                             <center>
                                 <h2 id="name" class="text-uppercase"></h2>
                             </center>
                         </div>
-
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+                            <div class="modal-dialog modal-md" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header" style="background-color: #2c2c2c;color: white;">
+                                  <h5 class="modal-title" id="exampleModalLabel3">Hey there!</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="color: white">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>如果您正在尋找的電影沒有在自動建議清單當中，請不要擔心。<br>
+                                        只需輸入電影名稱並單擊“Enter”。<br>
+                                        即使您犯了一些拼寫錯誤，可能也會有驚喜的發現。<br>
+                                        但遺憾的是，我們目前僅支援英文搜尋🙆🏻‍♂️</p>
+                                </div>
+                                <div class="modal-footer" style="text-align: center;">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Let's go!</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
                         <!------->
 
                         <p><a href="/register">會員註冊</a></p>
@@ -218,19 +242,13 @@
         <script src="/assets/js/main.js"></script>
 
         <!--- 印度人用到 -<script type="text/javascript" src="{{url_for('static', filename='autoComplete.min.js')}}"></script>--->
-        <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='autocomplete.js')}}"></script>
-
-        <script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"
-        ></script>
-        <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"
-        ></script>
+        	
+	<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='autocomplete.js')}}"></script>
+  
+    <script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
     </body>
 </html>
